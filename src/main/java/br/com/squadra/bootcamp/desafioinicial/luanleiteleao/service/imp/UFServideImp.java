@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UFServideImp implements UFService {
@@ -56,6 +55,23 @@ public class UFServideImp implements UFService {
         return ufsRepository.findById(uf.getCodigoUf())
                 .map(u-> ufsRepository.save(uf))
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"UF não encontrado"));
+    }
+
+    @Override
+    public List<UF> ListarTodos() {
+        return ufsRepository.findAll();
+    }
+
+    @Override
+    public UF buscarPorUFSigla(String sigla) {
+       return ufsRepository.procuraPorSiglaTodasUF(sigla).get(0);
+    }
+
+    @Override
+    public UF buscarPorUFcodigoUF(Long codigoUf) {
+        return ufsRepository.findById(codigoUf).map(
+                uf->uf
+        ).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"UF não encontrado"));
     }
 
 

@@ -11,4 +11,10 @@ public interface UFService {
     List<UF> deletar(Long codigoUf);
 
     UF atualizar(UF uf);
+
+    List<UF> ListarTodos();
+
+    UF buscarPorUFSigla(String sigla);
+    
+    UF buscarPorUFcodigoUF(Long codigoUf);
 }

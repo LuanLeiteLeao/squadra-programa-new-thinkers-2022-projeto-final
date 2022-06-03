@@ -38,6 +38,22 @@ public class UFController {
        return service.atualizar(uf);
     }
 
+    @GetMapping
+    public List<UF> listarTodasUfs(){
+        return service.ListarTodos();
+    }
+
+    @GetMapping(params = "sigla")
+    public UF getUFPorSigla(@RequestParam String sigla){
+       return service.buscarPorUFSigla(sigla);
+    }
+
+    @GetMapping(params = "codigoUf")
+    public UF getUFPorCodigoUf(@RequestParam long codigoUf){
+        System.out.println("----> "+codigoUf);
+        return service.ListarTodos().get(0);
+    }
+
 
 }
 
