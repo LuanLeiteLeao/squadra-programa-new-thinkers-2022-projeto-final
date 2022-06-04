@@ -1,21 +1,6 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-//
-//CREATE TABLE TB_UF
-//        (
-//        CODIGO_UF NUMBER(9) NOT NULL
-//        , SIGLA VARCHAR2(3) NOT NULL
-//        , NOME VARCHAR2(60) NOT NULL
-//        , STATUS NUMBER(3) NOT NULL
-//        , CONSTRAINT TB_UF_PK PRIMARY KEY
-//        (
-//        CODIGO_UF
-//        )
-//        ENABLE
-//        );
-
 @Entity
 @Table(name = "TB_UF")
 public class UF {

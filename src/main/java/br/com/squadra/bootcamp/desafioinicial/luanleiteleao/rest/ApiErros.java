@@ -1,26 +1,39 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest;
 
+import org.springframework.http.HttpStatus;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
 public class ApiErros {
-     private List<String> erros;
+     private Integer status;
+     private  String mensagem;
 
 
-     public ApiErros(String mensagemErro) {
-          this.erros = Arrays.asList(mensagemErro);
+     public ApiErros(HttpStatus status, String mensagem) {
+          this.status =  status.value();
+          this.mensagem = mensagem;
+     }
+     public ApiErros(Integer status, String mensagem) {
+          this.status =  status;
+          this.mensagem = mensagem;
      }
 
-     public ApiErros(List<String> erros) {
-          this.erros = erros;
+     public Integer getStatus() {
+          return status;
      }
 
-     public List<String> getErros() {
-          return erros;
+     public void setStatus(Integer status) {
+          this.status = status;
      }
 
-     public void setErros(List<String> erros) {
-          this.erros = erros;
+     public String getMensagem() {
+          return mensagem;
+     }
+
+     public void setMensagem(String mensagem) {
+          this.mensagem = mensagem;
      }
 }

@@ -1,0 +1,378 @@
+UF - /uf
+
+CONSULTANDO POR sigla OU codigoUF, TRAGA APENAS UM REGISTRO
+LISTANDO SEM PARÂMETROS, TRAGA TODOS OS REGISTROS DO BANCO DE DADOS
+
+EXEMPLO DE RETORNO CONSULTA SEM PARÂMETROS
+[
+  {
+    "codigoUF": 1,
+    "nome": "SÃO PAULO",
+    "sigla": "SP",
+    "status": 1
+  },
+  {
+    "codigoUF": 2,
+    "nome": "RIO DE JANEIRO",
+    "sigla": "RJ",
+    "status": 1
+  }
+]
+
+EXEMPLO DE RETORNO CONSULTA POR sigla OU codigoUF
+{
+	"codigoUF": 1,
+	"nome": "SÃO PAULO",
+	"sigla": "SP",
+	"status": 1
+}
+
+EXEMPLO DE JSON ENVIADO NO POST (AO GRAVAR, DEVE RETORNAR A LISTA COMPLETA DAS UFS QUE JÁ ESTÃO CADASTRADAS NO BANCO DE DADOS)
+{
+	"nome": "SÃO PAULO",
+	"sigla": "SP",
+	"status": 1
+}
+
+EXEMPLO DE JSON ENVIADO NO PUT (AO ALTERAR O REGISTRO, DEVE RETORNAR A LISTA COMPLETA DAS UFS QUE JÁ ESTÃO CADASTRADAS NO BANCO DE DADOS)
+{
+	"codigoUF": 1,
+	"nome": "SÃO PAULO",
+	"sigla": "SP",
+	"status": 1
+}
+
+DELETE VAI SER ENVIADO POR PARÂMETRO DE ROTA. (AO DELETAR O REGISTRO, DEVE RETORNAR A LISTA COMPLETA DAS UFS QUE JÁ ESTÃO CADASTRADAS NO BANCO DE DADOS)
+
+JSON DE RETORNO DE ERRO
+{
+	"status": 401,
+	"mensagem": "Já existe um estado com o nome SÃO PAULO. Você não pode cadastrar dois estados com o mesmo nome."
+}
+	
+
+-------------------------------------------------------------------------
+MUNICIPIO - /municipio
+
+CONSULTANDO POR codigoMunicipio, TRAGA APENAS UM REGISTRO
+LISTANDO SEM PARÂMETROS, TRAGA TODOS OS REGISTROS DO BANCO DE DADOS
+LISTANDO POR codigoUF, TRAGA TODOS OS MUNICÍPIOS DA UF RECEBIDA COMO PARÂMETRO.
+
+EXEMPLO DE RETORNO POR VÁRIOS REGISTROS
+[
+  {
+    "codigoMunicipio": 1,
+    "codigoUF": 1,
+    "nome": "JUNDIAÍ",
+    "status": 1
+  },
+  {
+    "codigoMunicipio": 2,
+    "codigoUF": 2,
+    "nome": "PETRÓPOLIS",
+    "status": 1
+  }
+]
+
+EXEMPLO DE RETORNO POR UM REGISTRO
+{
+	"codigoMunicipio": 2,
+	"codigoUF": 2,
+	"nome": "PETRÓPOLIS",
+	"status": 1
+}
+
+BAIRRO - /bairro
+CONSULTANDO POR codigoBairro, TRAGA APENAS UM REGISTRO
+LISTANDO POR codigoMunicipio, TRAGA TODOS OS BAIRROS DO MUNICÍPIO RECEBIDO COMO PARÂMETRO.
+[
+  {
+    "codigoBairro": 1,
+    "codigoMunicipio": 1,
+    "nome": "CENTRO",
+    "status": 1
+  },
+  {
+    "codigoBairro": 2,
+    "codigoMunicipio": 2,
+    "nome": "CAMPO GRANDE",
+    "status": 1
+  }
+]
+
+PESSOA - /pessoa
+
+LISTA DE PESSOAS SEM PARÂMETROS (SEM FILTRO)
+[
+  {
+    "codigoPessoa": 1,
+    "nome": "JOÃO",
+    "sobrenome": "DA SILVA",
+    "idade": 22,
+    "login": "joao_silva",
+    "senha": "joao123",
+    "status": 1
+  },
+  {
+    "codigoPessoa": 2,
+    "nome": "MARIA",
+    "sobrenome": "APARECIDA",
+    "idade": 42,
+    "login": "maria_aparecida",
+    "senha": "maria123",
+    "status": 1
+  }
+]
+
+PESQUISAR PESSOA POR codigoPessoa 
+{
+  "codigoPessoa": 1,
+  "nome": "JOÃO",
+  "sobrenome": "DA SILVA",
+  "idade": 22,
+  "login": "joao_silva",
+  "senha": "joao123",
+  "enderecos": [
+    {
+      "codigoEndereco": 1,
+      "codigoBairro": 1,
+      "codigoPessoa": 1,
+      "nomeRua": "RUA DAS FLORES",
+      "numero": "123",
+      "complemento": "CASA",
+      "cep": "12345-678",
+      "bairro": {
+        "codigoBairro": 1,
+        "codigoMunicipio": 1,
+        "nome": "CENTRO",
+        "status": 1,
+        "municipio": {
+          "codigoMunicipio": 1,
+          "codigoUF": 1,
+          "nome": "JUNDIAÍ",
+          "status": 1,
+          "uf": {
+            "codigoUF": 1,
+            "nome": "SÃO PAULO",
+            "sigla": "SP",
+            "status": 1
+          }
+        }
+      }
+    },
+    {
+      "codigoEndereco": 2,
+      "codigoBairro": 1,
+      "codigoPessoa": 1,
+      "nomeRua": "RUA DAS FLORES",
+      "numero": "456",
+      "complemento": "CASA VERDE",
+      "cep": "12345-680",
+      "bairro": {
+        "codigoBairro": 1,
+        "codigoMunicipio": 1,
+        "nome": "CENTRO",
+        "status": 1,
+        "municipio": {
+          "codigoMunicipio": 1,
+          "codigoUF": 1,
+          "nome": "JUNDIAÍ",
+          "status": 1,
+          "uf": {
+            "codigoUF": 1,
+            "nome": "SÃO PAULO",
+            "sigla": "SP",
+            "status": 1
+          }
+        }
+      }
+    }
+  ],
+  "status": 1
+}
+
+
+
+
+CADASTRAR PESSOA (EXEMPLO)
+{
+  "nome": "JOÃO",
+  "sobrenome": "DA SILVA",
+  "idade": 22,
+  "login": "joao_silva",
+  "senha": "joao123",
+  "enderecos": [
+    {
+      "codigoBairro": 1,
+	  'codigoPessoa': 100, (você não vai receber isso, deve ser gerado pelo banco)
+      "nomeRua": "RUA DAS FLORES",
+      "numero": "123",
+      "complemento": "CASA",
+      "cep": "12345-678",
+    },
+    {
+      "codigoBairro": 2,
+	  'codigoPessoa': 100, (você não vai receber isso, deve ser gerado pelo banco)
+      "nomeRua": "RUA DAS FLORES",
+      "numero": "456",
+      "complemento": null,
+      "cep": "12345-680",
+    }
+  ],
+  "status": 1
+}
+
+
+CADASTRAR PESSOA - JSON PARA TESTE
+{
+  "nome": "MARINA",
+  "sobrenome": "RUI BARBOSA",
+  "idade": 22,
+  "login": "joao_silva",
+  "senha": "joao123",
+  "enderecos": [
+    {
+      "codigoBairro": 1,
+      "nomeRua": "RUA A",
+      "numero": "123",
+      "complemento": "MINHA CASA UM",
+      "cep": "11111-678"
+    },
+    {
+      "codigoBairro": 2,
+      "nomeRua": "RUA B",
+      "numero": "456",
+      "complemento": "MINHA CASA DOIS",
+      "cep": "22222-680"
+    },
+    {
+      "codigoBairro": 3,
+      "nomeRua": "RUA C",
+      "numero": "456",
+      "complemento": "MINHA CASA TRÊS",
+      "cep": "33333-680"
+    }
+  ],
+  "status": 1
+}
+
+ALTERAR PESSOA - REGRAS
+{
+  "codigoPessoa": 100,
+  "nome": "JOÃO",
+  "sobrenome": "DA SILVA",
+  "idade": 22,
+  "login": "joao_silva",
+  "senha": "joao123",
+  "enderecos": [
+    {
+      "codigoEndereco": 1, (se receber o código, o endereço precisa ser alterado)
+      "codigoBairro": 1,
+      "codigoPessoa": 100,
+      "nomeRua": "RUA A",
+      "numero": "123",
+      "complemento": "COMPLEMENTO UM",
+      "cep": "12345-678"
+    },
+    {
+      "codigoEndereco": 2, (se receber o código, o endereço precisa ser alterado)
+      "codigoBairro": 2,
+      "codigoPessoa": 100,
+      "nomeRua": "RUA B",
+      "numero": "456",
+      "complemento": "COMPLEMENTO DOIS",
+      "cep": "12345-680"
+    },
+	{
+      "codigoEndereco": 0, (se não receber o código, o endereço precisa ser incluído)
+      "codigoBairro": 2,
+      "codigoPessoa": 100,
+      "nomeRua": "RUA D",
+      "numero": "456",
+      "complemento": "COMPLEMENTO TRES",
+      "cep": "12345-680"
+    }
+  ],
+  "status": 1
+}
+SUPONDO QUE A PESSOA ACIMA TINHA O ENDEREÇO 1, 2 E 3, COMO EU ESTOU PASSANDO APENAS O ENDEREÇO 1 e 2 VOCÊ DEVE:
+EXCLUIR O ENDEREÇO 3
+ALTERAR O ENDEREÇO 1 e 2
+ADICIONAR O ENDEREÇO QUE NÃO TEM CÓDIGO
+
+
+JSON PARA TESTES ALTERAR
+{
+  "codigoPessoa": 16,
+  "nome": "MARINA ALTERADA",
+  "sobrenome": "PELO PUT",
+  "idade": 40,
+  "login": "novologin",
+  "senha": "novasenha",
+  "enderecos": [
+    {
+      "codigoEndereco": 1,
+      "codigoBairro": 1,
+      "codigoPessoa": 16,
+      "nomeRua": "RUA A",
+      "numero": "123",
+      "complemento": "COMPLEMENTO UM",
+      "cep": "12345-678"
+    },
+    {
+      "codigoEndereco": 2,
+      "codigoBairro": 2,
+      "codigoPessoa": 16,
+      "nomeRua": "RUA B",
+      "numero": "456",
+      "complemento": "COMPLEMENTO DOIS",
+      "cep": "12345-680"
+    },
+	{
+      "codigoBairro": 4,
+      "codigoPessoa": 16,
+      "nomeRua": "RUA D",
+      "numero": "456",
+      "complemento": "COMPLEMENTO QUATRO",
+      "cep": "12345-680"
+    }
+  ],
+  "status": 1
+}
+
+
+
+
+_______________
+{
+  "nome": "MARINA",
+  "sobrenome": "RUI BARBOSA",
+  "idade": 22,
+  "login": "joao_silva",
+  "senha": "joao123",
+  "enderecos": [
+    {
+      "codigoBairro": 1,
+      "nomeRua": "RUA UM",
+      "numero": "123",
+      "complemento": "MINHA CASA UM",
+      "cep": "11111-678"
+    },
+    {
+      "codigoBairro": 2,
+      "nomeRua": "RUA DOIS",
+      "numero": "456",
+      "complemento": "MINHA CASA DOIS",
+      "cep": "22222-680"
+    },
+    {
+      "codigoBairro": 3,
+      "nomeRua": "RUA TRÊS",
+      "numero": "456",
+      "complemento": "MINHA CASA TRÊS",
+      "cep": "33333-680"
+    }
+  ],
+  "status": 1
+}
+

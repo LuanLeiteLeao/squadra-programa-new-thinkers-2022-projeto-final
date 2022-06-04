@@ -28,33 +28,37 @@ public class ApplicationControllerAdvice {
                 .map(erro -> erro.getDefaultMessage())
                 .collect(Collectors.toList());
 
-        return new ApiErros(erros);
+        return new ApiErros(BAD_REQUEST,String.join(" , ",erros));
     }
 
     @ExceptionHandler(JaExisteUmRegistroSalvoException.class)
     @ResponseStatus(BAD_REQUEST)
     public ApiErros lidarComExecaoJaExisteUmRegistroSalvoException( JaExisteUmRegistroSalvoException ex){
-        return new ApiErros(ex.getMessage());
+        return new ApiErros(BAD_REQUEST,ex.getMessage());
     }
 
     @ExceptionHandler(ResponseStatusException.class)
     @ResponseStatus(NOT_FOUND)
     public ApiErros lidarComResponseStatusException(ResponseStatusException ex){
-        return new ApiErros(ex.getReason());
+        return new ApiErros(NOT_FOUND,ex.getReason());
     }
 
     @ExceptionHandler(InvalidDataAccessApiUsageException.class)
     @ResponseStatus(BAD_REQUEST)
     public ApiErros lidarComInvalidDataAccessApiUsageException(InvalidDataAccessApiUsageException ex){
-        return new ApiErros(ex.getMessage());
+        return new ApiErros(BAD_REQUEST,ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseStatus(BAD_REQUEST)
     public ApiErros lidarComMethodArgumentTypeMismatchException( MethodArgumentTypeMismatchException ex){
-        return new ApiErros("incompatibilidade de valor para parametro "+ ex.getName());
+        return new ApiErros(BAD_REQUEST,"incompatibilidade de valor para parametro "+ ex.getName());
     }
 
-
+    @ExceptionHandler(IllegalStateException.class)
+    @ResponseStatus(NOT_FOUND)
+    public ApiErros lidarComAmbiguidadeDeRota(IllegalStateException ex){
+        return new ApiErros(NOT_FOUND,"URL inválida");
+    }
 
 }

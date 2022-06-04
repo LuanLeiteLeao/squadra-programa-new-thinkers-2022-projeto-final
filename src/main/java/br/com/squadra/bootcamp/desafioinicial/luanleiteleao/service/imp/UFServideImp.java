@@ -4,6 +4,7 @@ import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.UF;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.UFSRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.exception.JaExisteUmRegistroSalvoException;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.UFDTO;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.UFDTOComId;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.UFService;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class UFServideImp implements UFService {
     @Override
     @Transactional
     public UF salvar(UFDTO ufDTO) {
-        validaSeExisteUFComSiglaCadastrado(ufDTO);
+        validaSeExisteUFComSiglaJaCadastrado(ufDTO);
 
         return ufsRepository.save(
           new UF(ufDTO.getSigla(), ufDTO.getNome(), ufDTO.getStatus())
@@ -51,10 +52,12 @@ public class UFServideImp implements UFService {
     }
 
     @Override
-    public UF atualizar(UF uf) {
-        return ufsRepository.findById(uf.getCodigoUf())
-                .map(u-> ufsRepository.save(uf))
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"UF não encontrado"));
+    public UF atualizar(UFDTOComId uf) {
+        validaSeExisteApenasUmaUFComSiglaOuNomeJaCadastrado(uf);
+
+        return ufsRepository.findById(uf.getCodigoUF())
+                .map(u-> ufsRepository.save(new UF(uf.getSigla(),uf.getNome(),uf.getStatus())))
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"UF não encontrado, codigoUf inválido"));
     }
 
     @Override
@@ -75,11 +78,23 @@ public class UFServideImp implements UFService {
     }
 
 
-    private void validaSeExisteUFComSiglaCadastrado(UFDTO ufDTO){
+    private void validaSeExisteUFComSiglaJaCadastrado(UFDTO ufDTO){
         if(ufsRepository.buscarQuantidadeDeNomeSalvas(ufDTO.getNome()) > 0){
             throw new  JaExisteUmRegistroSalvoException("nome",ufDTO.getNome());
         }
         else if(ufsRepository.buscarQuantidadeDeSiglaSalvas(ufDTO.getSigla()) > 0){
+            throw new  JaExisteUmRegistroSalvoException("sigla", ufDTO.getSigla());
+        }
+    }
+
+    private void validaSeExisteApenasUmaUFComSiglaOuNomeJaCadastrado(UFDTO ufDTO){
+        Integer var = ufsRepository.buscarQuantidadeDeNomeSalvas(ufDTO.getNome());
+        if(ufsRepository.buscarQuantidadeDeNomeSalvas(ufDTO.getNome()) >=2 ){
+            throw new  JaExisteUmRegistroSalvoException("nome",ufDTO.getNome());
+        }
+
+        else if(ufsRepository.buscarQuantidadeDeSiglaSalvas(ufDTO.getSigla()) >=2 ){
+            var = ufsRepository.buscarQuantidadeDeSiglaSalvas(ufDTO.getSigla());
             throw new  JaExisteUmRegistroSalvoException("sigla", ufDTO.getSigla());
         }
     }

@@ -2,6 +2,7 @@ package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.controller;
 
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.UF;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.UFDTO;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.UFDTOComId;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.imp.UFServideImp;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +35,7 @@ public class UFController {
     }
 
     @PutMapping
-    public UF atualizar(@RequestBody  UF uf){
+    public UF atualizar(@RequestBody @Valid UFDTOComId uf){
        return service.atualizar(uf);
     }
 
@@ -50,8 +51,7 @@ public class UFController {
 
     @GetMapping(params = "codigoUf")
     public UF getUFPorCodigoUf(@RequestParam long codigoUf){
-        System.out.println("----> "+codigoUf);
-        return service.ListarTodos().get(0);
+        return service.buscarPorUFcodigoUF(codigoUf);
     }
 
 

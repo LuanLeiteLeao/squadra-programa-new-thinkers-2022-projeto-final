@@ -41,7 +41,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-        <!--        configuracao do spring-->
+        <!--       Banco de dados-->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc8</artifactId>
@@ -55,8 +55,14 @@
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ucp</artifactId>
         </dependency>
+        <!--    OUTROS-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.4</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

@@ -2,15 +2,17 @@ package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto;
 
 
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class UFDTO {
-    @NotNull(message = "Campo codigoUf é obrigatório")
-    private Long  codigoUf;
     @NotNull(message = "Campo sigla é obrigatório")
+    @NotEmpty(message = "Campo sigla não pode ser vazio")
     private  String sigla;
     @NotNull(message = "Campo nome é obrigatório")
+    @NotEmpty(message ="Campo nome não pode ser vazio")
     private String nome;
+
     @NotNull(message = "Campo status é obrigatório")
     private Integer status;
 
@@ -20,17 +22,6 @@ public class UFDTO {
         this.status = status;
     }
 
-    public Long getCodigoUf() {
-        return codigoUf;
-    }
-
-    public void setCodigoUf(Long codigoUf) {
-        this.codigoUf = codigoUf;
-    }
-
-    public UFDTO(String sigla) {
-        this.sigla = sigla;
-    }
 
     public String getSigla() {
         return sigla;
