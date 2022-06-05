@@ -56,7 +56,10 @@ public class UFServideImp implements UFService {
         validaSeExisteApenasUmaUFComSiglaOuNomeJaCadastrado(uf);
 
         return ufsRepository.findById(uf.getCodigoUF())
-                .map(u-> ufsRepository.save(new UF(uf.getSigla(),uf.getNome(),uf.getStatus())))
+                .map(u-> ufsRepository.save(new UF(u.getCodigoUf(),
+                        uf.getSigla(),
+                        uf.getNome(),
+                        uf.getStatus())))
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"UF não encontrado, codigoUf inválido"));
     }
 

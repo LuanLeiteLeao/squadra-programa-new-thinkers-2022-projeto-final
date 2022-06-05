@@ -6,10 +6,14 @@ import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.Mu
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.UFSRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.MunicipioDTO;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.MunicipioService;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MunicipioServiceImp implements MunicipioService {
@@ -31,13 +35,69 @@ public class MunicipioServiceImp implements MunicipioService {
         Municipio municipioSalvo = municipioRepository.save(
                 new Municipio(uf, municipioDTO.getNome(), municipioDTO.getStatus()));
 
+        return converterParaMunicipioDTO(municipioSalvo);
+    }
+
+
+
+    @Override
+    public MunicipioDTO atualizar(MunicipioDTO municipioASerAtualizadoDTO) {
+
+        UF ufASerAtualizado = getUfOuLancaErro(municipioASerAtualizadoDTO.getCodigoUF());
+        Municipio municipioASerAtualizado = converterParaMunicipio(
+                municipioASerAtualizadoDTO,
+                ufASerAtualizado);
+
+        Municipio municipioAtualizado = municipioRepository
+                .findById(municipioASerAtualizadoDTO.getCodigoMunicipio())
+                .map(municipio ->{
+                            municipioASerAtualizado.setCodigoMunicipio(municipio.getCodigoMunicipio());
+                            return municipioRepository.save(municipioASerAtualizado);
+                        }
+                    )
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Não Existe nem um Municipio cadastrado com esse codigoMunicipio: "
+                                + municipioASerAtualizadoDTO.getCodigoMunicipio()));
+
+        return converterParaMunicipioDTO(municipioAtualizado);
+
+    }
+
+    public List<MunicipioDTO> deletar(Long codigoMunicipio) {
+        if(codigoMunicipio == null){
+            throw new InvalidDataAccessApiUsageException("codigoMunicipio não pode ser nulo");
+        }
+
+        municipioRepository.findById(codigoMunicipio)
+                .map(municipio ->{
+                    municipioRepository.delete(municipio);
+                    return true;
+                })
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"codigoMunicipio não encotrado"));
+
+
+        return municipioRepository.findAll()
+                .stream()
+                .map(m ->converterParaMunicipioDTO(m))
+                .collect(Collectors.toList());
+    }
+
+    private Municipio converterParaMunicipio(MunicipioDTO municipioASerAtualizadoDTO, UF ufASerAtualizado) {
+        return new Municipio(
+                ufASerAtualizado,
+                municipioASerAtualizadoDTO.getNome(),
+                municipioASerAtualizadoDTO.getStatus()
+        );
+    }
+
+    private MunicipioDTO converterParaMunicipioDTO(Municipio municipioSalvo) {
         return new MunicipioDTO(
                 municipioSalvo.getCodigoMunicipio(),
                 municipioSalvo.getCodigoUf().getCodigoUf(),
                 municipioSalvo.getNome(),
                 municipioSalvo.getStatus()
-                );
-
+        );
     }
 
     private UF getUfOuLancaErro(Long codigoUf){
@@ -46,4 +106,5 @@ public class MunicipioServiceImp implements MunicipioService {
                         HttpStatus.BAD_REQUEST,"Não Existe nem um estado cadastrado com esse codigoUf: "+codigoUf));
 
     }
+
 }

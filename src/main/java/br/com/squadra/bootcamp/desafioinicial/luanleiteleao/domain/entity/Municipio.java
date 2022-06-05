@@ -30,6 +30,13 @@ public class Municipio {
         this.status = status;
     }
 
+    public Municipio(Long codigoMunicipio, UF codigoUf, String nome, Integer status) {
+        this.codigoMunicipio = codigoMunicipio;
+        this.codigoUf = codigoUf;
+        this.nome = nome;
+        this.status = status;
+    }
+
     public Municipio() {
         super();
     }

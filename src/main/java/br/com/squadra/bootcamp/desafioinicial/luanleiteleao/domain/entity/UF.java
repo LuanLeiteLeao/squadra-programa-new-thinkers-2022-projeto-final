@@ -1,5 +1,7 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity;
 
+import lombok.extern.java.Log;
+
 import javax.persistence.*;
 @Entity
 @Table(name = "TB_UF")
@@ -26,6 +28,14 @@ public class UF {
         this.nome = nome;
         this.status = status;
     }
+
+    public UF(Long codigoUf,String sigla, String nome, Integer status) {
+        this.codigoUf=codigoUf;
+        this.sigla = sigla;
+        this.nome = nome;
+        this.status = status;
+    }
+
 
     public Long getCodigoUf() {
         return codigoUf;

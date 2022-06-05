@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
@@ -21,5 +23,15 @@ public class MunicipioController {
     @ResponseStatus(CREATED)
     public MunicipioDTO salvar(@RequestBody @Valid MunicipioDTO municipioDTO){
         return service.salvar(municipioDTO);
+    }
+
+    @PutMapping
+    public MunicipioDTO atualizar(@RequestBody @Valid MunicipioDTO municipioDTO){
+        return service.atualizar(municipioDTO);
+    }
+
+    @DeleteMapping
+    public List<MunicipioDTO> deletar(@RequestParam Long codigoMunicipio){
+        return service.deletar(codigoMunicipio);
     }
 }
