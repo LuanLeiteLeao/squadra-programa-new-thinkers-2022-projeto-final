@@ -52,6 +52,7 @@ public class UFServideImp implements UFService {
     }
 
     @Override
+    @Transactional
     public UF atualizar(UFDTOComId uf) {
         validaSeExisteApenasUmaUFComSiglaOuNomeJaCadastrado(uf);
 

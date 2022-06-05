@@ -41,6 +41,7 @@ public class MunicipioServiceImp implements MunicipioService {
 
 
     @Override
+    @Transactional
     public MunicipioDTO atualizar(MunicipioDTO municipioASerAtualizadoDTO) {
 
         UF ufASerAtualizado = getUfOuLancaErro(municipioASerAtualizadoDTO.getCodigoUF());
