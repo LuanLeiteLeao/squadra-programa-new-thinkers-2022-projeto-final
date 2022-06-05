@@ -1,5 +1,6 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.controller;
 
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Municipio;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.MunicipioDTO;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.imp.MunicipioServiceImp;
 import org.springframework.web.bind.annotation.*;
@@ -34,4 +35,18 @@ public class MunicipioController {
     public List<MunicipioDTO> deletar(@RequestParam Long codigoMunicipio){
         return service.deletar(codigoMunicipio);
     }
+
+//    LISTANDO POR codigoUF, TRAGA TODOS OS MUNICÍPIOS DA UF RECEBIDA COMO PARÂMETRO.
+    @GetMapping
+    public List<MunicipioDTO> listarTodos(){
+        //LISTANDO SEM PARÂMETROS, TRAGA TODOS OS REGISTROS DO BANCO DE DADOS
+        return service.listarTodos();
+    }
+
+    @GetMapping(params = "codigoMunicipio")
+    public MunicipioDTO consultandoPorcodigoMunicipio(@RequestParam Long codigoMunicipio){
+        //CONSULTANDO POR codigoMunicipio, TRAGA APENAS UM REGISTRO
+        return service.consultandoPorcodigoMunicipio(codigoMunicipio);
+    }
+
 }

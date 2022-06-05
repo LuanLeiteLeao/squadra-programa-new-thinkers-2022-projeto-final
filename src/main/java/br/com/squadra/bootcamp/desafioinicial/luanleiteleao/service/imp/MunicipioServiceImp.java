@@ -7,7 +7,7 @@ import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.UF
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.MunicipioDTO;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.MunicipioService;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
-import org.springframework.http.HttpStatus;
+import static org.springframework.http.HttpStatus.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -56,7 +56,7 @@ public class MunicipioServiceImp implements MunicipioService {
                         }
                     )
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.BAD_REQUEST,
+                        BAD_REQUEST,
                         "Não Existe nem um Municipio cadastrado com esse codigoMunicipio: "
                                 + municipioASerAtualizadoDTO.getCodigoMunicipio()));
 
@@ -74,13 +74,33 @@ public class MunicipioServiceImp implements MunicipioService {
                     municipioRepository.delete(municipio);
                     return true;
                 })
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"codigoMunicipio não encotrado"));
+                .orElseThrow(()-> new ResponseStatusException(NOT_FOUND,"codigoMunicipio não encotrado"));
 
 
         return municipioRepository.findAll()
                 .stream()
                 .map(m ->converterParaMunicipioDTO(m))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MunicipioDTO> listarTodos() {
+        return municipioRepository
+                .findAll()
+                .stream()
+                .map(m ->converterParaMunicipioDTO(m))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public MunicipioDTO consultandoPorcodigoMunicipio(Long codigoMunicipio) {
+        Municipio municipioSalvo = municipioRepository
+                .findById(codigoMunicipio)
+                .orElseThrow(() ->
+                        new ResponseStatusException(BAD_REQUEST,
+                                "Não existe nem um Municipio cadastrado com este nome"));
+
+        return converterParaMunicipioDTO(municipioSalvo);
     }
 
     private Municipio converterParaMunicipio(MunicipioDTO municipioASerAtualizadoDTO, UF ufASerAtualizado) {
@@ -103,7 +123,7 @@ public class MunicipioServiceImp implements MunicipioService {
     private UF getUfOuLancaErro(Long codigoUf){
         return ufsRepository.findById(codigoUf)
                 .orElseThrow(()-> new ResponseStatusException(
-                        HttpStatus.BAD_REQUEST,"Não Existe nem um estado cadastrado com esse codigoUf: "+codigoUf));
+                        BAD_REQUEST,"Não Existe nem um estado cadastrado com esse codigoUf: "+codigoUf));
 
     }
 

@@ -9,4 +9,8 @@ public interface MunicipioService {
 
     MunicipioDTO atualizar(MunicipioDTO municipioDTO);
     public List<MunicipioDTO> deletar(Long codigoMunicipio);
+
+    List<MunicipioDTO> listarTodos();
+
+    MunicipioDTO consultandoPorcodigoMunicipio(Long codigoMunicipio);
 }
