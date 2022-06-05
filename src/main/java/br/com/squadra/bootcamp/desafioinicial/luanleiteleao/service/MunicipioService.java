@@ -13,4 +13,6 @@ public interface MunicipioService {
     List<MunicipioDTO> listarTodos();
 
     MunicipioDTO consultandoPorcodigoMunicipio(Long codigoMunicipio);
+
+    List<MunicipioDTO> listarPorCodigoUF(Long codigoUF);
 }

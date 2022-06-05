@@ -36,7 +36,6 @@ public class MunicipioController {
         return service.deletar(codigoMunicipio);
     }
 
-//    LISTANDO POR codigoUF, TRAGA TODOS OS MUNICÍPIOS DA UF RECEBIDA COMO PARÂMETRO.
     @GetMapping
     public List<MunicipioDTO> listarTodos(){
         //LISTANDO SEM PARÂMETROS, TRAGA TODOS OS REGISTROS DO BANCO DE DADOS
@@ -48,5 +47,13 @@ public class MunicipioController {
         //CONSULTANDO POR codigoMunicipio, TRAGA APENAS UM REGISTRO
         return service.consultandoPorcodigoMunicipio(codigoMunicipio);
     }
+
+    @GetMapping(params = "codigoUF")
+    public List<MunicipioDTO> listarPorCodigoUF(@RequestParam Long codigoUF ){
+        //LISTANDO POR codigoUF, TRAGA TODOS OS MUNICÍPIOS DA UF RECEBIDA COMO PARÂMETRO.
+        return service.listarPorCodigoUF(codigoUF);
+
+    }
+
 
 }

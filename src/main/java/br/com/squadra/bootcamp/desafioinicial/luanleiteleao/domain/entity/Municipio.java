@@ -16,7 +16,7 @@ public class Municipio {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="CODIGO_UF")
-    private UF codigoUf;
+    private UF codigoUF;
 
     @Column(name = "NOME")
     private String nome;
@@ -25,14 +25,14 @@ public class Municipio {
     private Integer status;
 
     public Municipio(UF uf, String nome, Integer status) {
-        this.codigoUf = uf;
+        this.codigoUF = uf;
         this.nome = nome;
         this.status = status;
     }
 
-    public Municipio(Long codigoMunicipio, UF codigoUf, String nome, Integer status) {
+    public Municipio(Long codigoMunicipio, UF codigoUF, String nome, Integer status) {
         this.codigoMunicipio = codigoMunicipio;
-        this.codigoUf = codigoUf;
+        this.codigoUF = codigoUF;
         this.nome = nome;
         this.status = status;
     }

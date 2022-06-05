@@ -103,6 +103,18 @@ public class MunicipioServiceImp implements MunicipioService {
         return converterParaMunicipioDTO(municipioSalvo);
     }
 
+    @Override
+    public List<MunicipioDTO> listarPorCodigoUF(Long codigoUF) {
+
+        UF uf = getUfOuLancaErro(codigoUF);
+
+        return municipioRepository
+                .procuraPorcodigoUFTodosMunicipios(uf)
+                .stream()
+                .map(m ->converterParaMunicipioDTO(m))
+                .collect(Collectors.toList());
+    }
+
     private Municipio converterParaMunicipio(MunicipioDTO municipioASerAtualizadoDTO, UF ufASerAtualizado) {
         return new Municipio(
                 ufASerAtualizado,
@@ -114,7 +126,7 @@ public class MunicipioServiceImp implements MunicipioService {
     private MunicipioDTO converterParaMunicipioDTO(Municipio municipioSalvo) {
         return new MunicipioDTO(
                 municipioSalvo.getCodigoMunicipio(),
-                municipioSalvo.getCodigoUf().getCodigoUf(),
+                municipioSalvo.getCodigoUF().getCodigoUf(),
                 municipioSalvo.getNome(),
                 municipioSalvo.getStatus()
         );
