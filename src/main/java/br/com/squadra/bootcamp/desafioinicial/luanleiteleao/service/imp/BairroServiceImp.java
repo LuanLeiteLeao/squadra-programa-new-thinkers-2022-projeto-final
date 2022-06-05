@@ -11,7 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class BairroServiceImp implements BairroService {
@@ -44,7 +48,63 @@ public class BairroServiceImp implements BairroService {
     @Override
     @Transactional
     public BairroDTO atualizar(BairroDTO bairroDTO) {
-        return null;
+
+        seCampoForNuloLancaExecao(bairroDTO.getCodigoBairro(),"codigoBairro");
+
+        Municipio municipio = getMunicipioOuLancaErro(bairroDTO.getCodigoMunicipio());
+        Bairro bairroASerAtualizado = converterParaBairro(
+                bairroDTO,
+                municipio);
+
+        Bairro bairroAtualizado = bairroRepository
+                .findById(bairroASerAtualizado.getCodigoBairro())
+                .map(bairro ->{
+                            bairroASerAtualizado.setCodigoBairro(bairro.getCodigoBairro());
+                            return bairroRepository.save(bairroASerAtualizado);
+                        }
+                )
+                .orElseThrow(() -> new ResponseStatusException(
+                        BAD_REQUEST,
+                        "Não Existe nem um Bairro cadastrado com esse codigoBairro: "
+                                + bairroASerAtualizado.getCodigoBairro()));
+
+        return converterParaBairroDTO(bairroAtualizado);
+    }
+
+    private void seCampoForNuloLancaExecao(Object campo,String nomeDoCampo) {
+        if (campo == null){
+            throw new ResponseStatusException(
+                    BAD_REQUEST,
+                    String.format(" Campo %s é obrigatório",
+                    nomeDoCampo));
+        }
+    }
+
+    @Override
+    public List<BairroDTO> deletar(Long codigoBairro) {
+
+        seCampoForNuloLancaExecao(codigoBairro,"codigoBairro");
+
+       bairroRepository.findById(codigoBairro)
+                .map(bairro ->{
+                    bairroRepository.delete(bairro);
+                    return true;
+                })
+                .orElseThrow(()-> new ResponseStatusException(NOT_FOUND,"codigoBairro não encotrado"));
+
+        return bairroRepository.findAll()
+                .stream()
+                .map(bairro ->converterParaBairroDTO(bairro))
+                .collect(Collectors.toList());
+    }
+
+    private Bairro converterParaBairro(BairroDTO bairroDTO, Municipio municipio) {
+       return new Bairro(
+                bairroDTO.getCodigoBairro(),
+                municipio,
+                bairroDTO.getNome(),
+                bairroDTO.getStatus()
+        );
     }
 
     private Municipio getMunicipioOuLancaErro(Long codigoMunicipio) {

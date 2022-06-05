@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/bairro")
@@ -27,4 +28,13 @@ public class BairroController {
         return service.salvar(bairroDTO);
     }
 
+    @PutMapping
+    public BairroDTO atualizar(@RequestBody @Valid BairroDTO bairroDTO){
+        return service.atualizar(bairroDTO);
+    }
+
+    @DeleteMapping
+    public List<BairroDTO> deletar(@RequestParam Long codigoBairro){
+        return service.deletar(codigoBairro);
+    }
 }
