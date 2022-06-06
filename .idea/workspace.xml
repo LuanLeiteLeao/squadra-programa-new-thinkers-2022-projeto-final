@@ -4,12 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84f4fc6b-9d18-4f01-b0d6-b768ba9f54ed" name="Changes" comment="Deletando bairro">
+    <list default="true" id="84f4fc6b-9d18-4f01-b0d6-b768ba9f54ed" name="Changes" comment="implementado todos os listar de Bairro">
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/entity/Endereco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/entity/Pessoa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/EnderecoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/PessoaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/PessoasController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/EnderecoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/EnderecoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/PessoaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/EnderecoServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/validation/NotEmptyList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/validation/constraintvalidation/NotEmptySetValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/BairroRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/BairroRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/BairroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/BairroController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/BairroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/BairroService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/BairroServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/BairroServiceImp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -43,6 +52,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/Trabalho/IdeaProjects/CrusoDeJava/desafio_final/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao",
     "settings.editor.selected.configurable": "editor.preferences.appearance"
   },
   "keyToStringList": {
@@ -57,8 +67,14 @@
       <recent name="br.com.squadra.bootcamp.desafioinicial.luanleiteleao.exeption" />
       <recent name="br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Trabalho\IdeaProjects\CrusoDeJava\desafio_final\src\main\java\br\com\squadra\bootcamp\desafioinicial\luanleiteleao" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Trabalho\IdeaProjects\CrusoDeJava\desafio_final\src\main\java\br\com\squadra\bootcamp\desafioinicial\luanleiteleao" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service" />
     </key>
   </component>
   <component name="RunManager">
@@ -153,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654473567573</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="implementado todos os listar de Bairro">
+      <created>1654475490414</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1654475490414</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -177,6 +200,18 @@
     <MESSAGE value="Mapeamento da entidade Bairro" />
     <MESSAGE value="Criando BairroDTO e Salvar bairro" />
     <MESSAGE value="Deletando bairro" />
-    <option name="LAST_COMMIT_MESSAGE" value="Deletando bairro" />
+    <MESSAGE value="implementado todos os listar de Bairro" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementado todos os listar de Bairro" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/EnderecoServiceImp.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
