@@ -98,6 +98,37 @@ public class BairroServiceImp implements BairroService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<BairroDTO> listarTodos() {
+        return bairroRepository
+                .findAll()
+                .stream()
+                .map(bairro -> converterParaBairroDTO(bairro))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public BairroDTO consultarPorCodigoBairro(Long codigoBairro) {
+        seCampoForNuloLancaExecao(codigoBairro,"codigoBairro");
+        Bairro bairroAchado = bairroRepository
+                .findById(codigoBairro)
+                .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST,
+                        "Não Existe nem um Bairro cadastrado com esse codigoBairro: " + codigoBairro));
+        return converterParaBairroDTO(bairroAchado);
+    }
+
+    @Override
+    public List<BairroDTO> listarPorCodigoMunicipio(Long codigoMunicipio) {
+        Municipio municipio = getMunicipioOuLancaErro(codigoMunicipio);
+
+        return bairroRepository
+                .procuraPorCodigoMunicipioTodosBairros(municipio)
+                .stream()
+                .map(bairro -> converterParaBairroDTO(bairro))
+                .collect(Collectors.toList());
+
+    }
+
     private Bairro converterParaBairro(BairroDTO bairroDTO, Municipio municipio) {
        return new Bairro(
                 bairroDTO.getCodigoBairro(),

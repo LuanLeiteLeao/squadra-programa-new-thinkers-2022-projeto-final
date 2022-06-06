@@ -37,4 +37,21 @@ public class BairroController {
     public List<BairroDTO> deletar(@RequestParam Long codigoBairro){
         return service.deletar(codigoBairro);
     }
+
+    @GetMapping
+    public List<BairroDTO> listarTodos(){
+        return service.listarTodos();
+    }
+
+    @GetMapping(params = "codigoBairro")
+    public BairroDTO consultarPorCodigoBairro(@RequestParam Long codigoBairro){
+//        CONSULTANDO POR codigoBairro, TRAGA APENAS UM REGISTRO
+        return service.consultarPorCodigoBairro(codigoBairro);
+    }
+
+    @GetMapping(params = "codigoMunicipio" )
+    public  List<BairroDTO> listarPorCodigoMunicipio(@RequestParam Long codigoMunicipio){
+        // LISTANDO POR codigoMunicipio, TRAGA TODOS OS BAIRROS DO MUNICÍPIO RECEBIDO COMO PARÂMETRO.
+        return service.listarPorCodigoMunicipio(codigoMunicipio);
+    }
 }

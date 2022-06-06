@@ -11,4 +11,9 @@ public interface BairroService {
     public BairroDTO atualizar(BairroDTO bairroDTO);
     List<BairroDTO> deletar(Long codigoBairro);
 
+    List<BairroDTO> listarTodos();
+
+    BairroDTO consultarPorCodigoBairro(Long codigoBairro);
+
+    List<BairroDTO> listarPorCodigoMunicipio(Long codigoMunicipio);
 }
