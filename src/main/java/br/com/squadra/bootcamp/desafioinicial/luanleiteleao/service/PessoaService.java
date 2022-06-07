@@ -5,4 +5,8 @@ import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.PessoaDTO;
 
 public interface PessoaService{
     PessoaDTO salvar(PessoaDTO pessoa);
+
+    PessoaDTO atualizar(PessoaDTO pessoa);
+
+    void delete(Long codigoPessoa);
 }

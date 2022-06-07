@@ -7,6 +7,7 @@ import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.Ba
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.EnderecoRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.EnderecoDTO;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.EnderecoService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -33,6 +34,12 @@ public class EnderecoServiceImp implements EnderecoService {
         List<Endereco> listaEnderecos = prepararEnderecoParaSalvar(endereco,pessoa);
         List<Endereco> enderecosSalvos = enderecoRepository.saveAll(listaEnderecos);
         return converterParaEnderecoDTO(enderecosSalvos);
+    }
+
+    public List<EnderecoDTO> listarEnderecosPorCodigoPessoa(Pessoa pessoa) {
+        return converterParaEnderecoDTO(
+                enderecoRepository
+                        .procuraPorCodigoPessoaTodosEnderecos(pessoa));
     }
 
     private List<EnderecoDTO> converterParaEnderecoDTO(List<Endereco> listaDeEndereco){
@@ -76,5 +83,13 @@ public class EnderecoServiceImp implements EnderecoService {
                 .orElseThrow(()-> new ResponseStatusException(
                         BAD_REQUEST,"Não Existe nem um Bairro cadastrado com esse codigoBairro: "+codigoBairro));
 
+    }
+
+    public void deletarTodosEnderecosPorPessoa(Pessoa pessoa) {
+        enderecoRepository
+                .procuraPorCodigoPessoaTodosEnderecos(pessoa)
+                .forEach(endereco -> {
+                    enderecoRepository.delete(endereco);
+                });
     }
 }

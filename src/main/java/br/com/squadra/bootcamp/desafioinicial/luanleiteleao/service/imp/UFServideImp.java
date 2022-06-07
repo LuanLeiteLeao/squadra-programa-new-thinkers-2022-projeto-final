@@ -92,13 +92,11 @@ public class UFServideImp implements UFService {
     }
 
     private void validaSeExisteApenasUmaUFComSiglaOuNomeJaCadastrado(UFDTO ufDTO){
-        Integer var = ufsRepository.buscarQuantidadeDeNomeSalvas(ufDTO.getNome());
         if(ufsRepository.buscarQuantidadeDeNomeSalvas(ufDTO.getNome()) >=2 ){
             throw new  JaExisteUmRegistroSalvoException("nome",ufDTO.getNome());
         }
 
         else if(ufsRepository.buscarQuantidadeDeSiglaSalvas(ufDTO.getSigla()) >=2 ){
-            var = ufsRepository.buscarQuantidadeDeSiglaSalvas(ufDTO.getSigla());
             throw new  JaExisteUmRegistroSalvoException("sigla", ufDTO.getSigla());
         }
     }

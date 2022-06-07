@@ -2,7 +2,6 @@ package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.imp;
 
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Bairro;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Municipio;
-import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.UF;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.BairroRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.MunicipioRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.BairroDTO;
@@ -14,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static br.com.squadra.bootcamp.desafioinicial.luanleiteleao.validation.ValidadoresGerais.validaSeCampoForNulo;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -49,7 +49,7 @@ public class BairroServiceImp implements BairroService {
     @Transactional
     public BairroDTO atualizar(BairroDTO bairroDTO) {
 
-        seCampoForNuloLancaExecao(bairroDTO.getCodigoBairro(),"codigoBairro");
+        validaSeCampoForNulo(bairroDTO.getCodigoBairro(),"codigoBairro");
 
         Municipio municipio = getMunicipioOuLancaErro(bairroDTO.getCodigoMunicipio());
         Bairro bairroASerAtualizado = converterParaBairro(
@@ -71,19 +71,10 @@ public class BairroServiceImp implements BairroService {
         return converterParaBairroDTO(bairroAtualizado);
     }
 
-    private void seCampoForNuloLancaExecao(Object campo,String nomeDoCampo) {
-        if (campo == null){
-            throw new ResponseStatusException(
-                    BAD_REQUEST,
-                    String.format(" Campo %s é obrigatório",
-                    nomeDoCampo));
-        }
-    }
-
     @Override
     public List<BairroDTO> deletar(Long codigoBairro) {
 
-        seCampoForNuloLancaExecao(codigoBairro,"codigoBairro");
+        validaSeCampoForNulo(codigoBairro,"codigoBairro");
 
        bairroRepository.findById(codigoBairro)
                 .map(bairro ->{
@@ -109,7 +100,7 @@ public class BairroServiceImp implements BairroService {
 
     @Override
     public BairroDTO consultarPorCodigoBairro(Long codigoBairro) {
-        seCampoForNuloLancaExecao(codigoBairro,"codigoBairro");
+        validaSeCampoForNulo(codigoBairro,"codigoBairro");
         Bairro bairroAchado = bairroRepository
                 .findById(codigoBairro)
                 .orElseThrow(() -> new ResponseStatusException(BAD_REQUEST,

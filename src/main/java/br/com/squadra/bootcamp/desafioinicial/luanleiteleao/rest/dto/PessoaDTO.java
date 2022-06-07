@@ -35,7 +35,7 @@ public class PessoaDTO {
     @NotEmpty(message = "Campo senha não pode ser vazio")
     private String senha;
 
-    @NotEmptyList(message = "campo de endereçoes não pode ser vazio")
+//    @NotEmptyList(message = "campo de endereçoes não pode ser vazio")
     private List<EnderecoDTO> enderecos;
 
     @NotNull(message = "Campo status é obrigatório")

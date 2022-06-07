@@ -15,7 +15,7 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "endereco_gerator")
     @SequenceGenerator(name = "endereco_gerator", initialValue = 1, allocationSize = 1, sequenceName = "SEQUENCE_ENDERECO")
     private Long codigoEndereco;
-
+    //Caso delete a pessoa remova os enderecos cascade = CascadeType.REMOVE
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="CODIGO_PESSOA")
     private Pessoa codigoPessoa;
