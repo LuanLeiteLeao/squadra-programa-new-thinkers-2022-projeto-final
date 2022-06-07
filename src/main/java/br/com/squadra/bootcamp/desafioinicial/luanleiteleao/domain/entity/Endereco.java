@@ -45,6 +45,16 @@ public class Endereco {
         this.cep = cep;
     }
 
+    public Endereco(Long codigoEndereco, Pessoa codigoPessoa, Bairro codigoBairro, String nomeRua, String numero, String complemento, String cep) {
+        this.codigoEndereco = codigoEndereco;
+        this.codigoPessoa = codigoPessoa;
+        this.codigoBairro = codigoBairro;
+        this.nomeRua = nomeRua;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.cep = cep;
+    }
+
     public Endereco(Bairro codigoBairro, String nomeRua, String numero, String complemento, String cep) {
         this.codigoBairro = codigoBairro;
         this.nomeRua = nomeRua;

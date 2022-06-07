@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84f4fc6b-9d18-4f01-b0d6-b768ba9f54ed" name="Changes" comment="implementado salvar Pessoa e Bairo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/validation/ValidadoresGerais.java" afterDir="false" />
+    <list default="true" id="84f4fc6b-9d18-4f01-b0d6-b768ba9f54ed" name="Changes" comment="implementado atualizar e delenar nos campos Pessoa e Bairo">
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/BairroCompletoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/EnderecoCompletoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/MunicipioCompletoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaCompletaComEnderecosDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaRessumidaSemEnderecosDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/UFCompletoTDO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/entity/Endereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/entity/Endereco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/EnderecoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/EnderecoRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/PessoasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/PessoasController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/PessoaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/PessoaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/BairroServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/BairroServiceImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/EnderecoServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/EnderecoServiceImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/UFServideImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/UFServideImp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,20 +45,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/Trabalho/IdeaProjects/CrusoDeJava/desafio_final/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao",
-    "settings.editor.selected.configurable": "editor.preferences.appearance"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Trabalho/IdeaProjects/CrusoDeJava/desafio_final/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto" />
@@ -181,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654546130609</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="implementado atualizar e delenar nos campos Pessoa e Bairo">
+      <created>1654565724518</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1654565724518</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -207,6 +215,23 @@
     <MESSAGE value="Deletando bairro" />
     <MESSAGE value="implementado todos os listar de Bairro" />
     <MESSAGE value="implementado salvar Pessoa e Bairo" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementado salvar Pessoa e Bairo" />
+    <MESSAGE value="implementado atualizar e delenar nos campos Pessoa e Bairo" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementado atualizar e delenar nos campos Pessoa e Bairo" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -7,7 +7,6 @@ import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.Ba
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.EnderecoRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.EnderecoDTO;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.EnderecoService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -36,11 +35,16 @@ public class EnderecoServiceImp implements EnderecoService {
         return converterParaEnderecoDTO(enderecosSalvos);
     }
 
-    public List<EnderecoDTO> listarEnderecosPorCodigoPessoa(Pessoa pessoa) {
+    public List<EnderecoDTO> listarEnderecosDTOPorCodigoPessoa(Pessoa pessoa) {
         return converterParaEnderecoDTO(
                 enderecoRepository
                         .procuraPorCodigoPessoaTodosEnderecos(pessoa));
     }
+
+    public List<Endereco> listarEnderecosPorCodigoPessoa(Pessoa pessoa) {
+        return enderecoRepository.procuraPorCodigoPessoaTodosEnderecos(pessoa);
+    }
+
 
     private List<EnderecoDTO> converterParaEnderecoDTO(List<Endereco> listaDeEndereco){
         List<EnderecoDTO> listaConvertida = new ArrayList<>();
@@ -65,6 +69,7 @@ public class EnderecoServiceImp implements EnderecoService {
         enderecos.forEach(end -> {
             enderecoSet.add(
                     new Endereco(
+                            end.getCodigoEndereco(),
                             pessoa,
                             getBairroOuLancaErro(end.getCodigoBairro()),
                             end.getNomeRua(),

@@ -1,7 +1,6 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.controller;
 
-import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Pessoa;
-import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.PessoaDTO;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.*;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.imp.PessoaServiceImp;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +21,8 @@ public class PessoasController {
     }
 
     @GetMapping
-    public List<Pessoa> listarTodos(){
-//        a ser implementado
-        return new ArrayList<>();
+    public List<PessoaRessumidaSemEnderecosDTO> listarTodos(){
+        return service.listarTodos();
     }
 
     @PostMapping
@@ -43,4 +41,11 @@ public class PessoasController {
         service.delete(codigoPessoa);
         return "Deletado";
     }
+
+//    PESQUISAR PESSOA POR codigoPessoa
+    @GetMapping(params = "codigoPessoa")
+    public PessoaCompletaComEnderecosDTO pesquisarPessoaPorCodigoPessoa( @RequestParam Long codigoPessoa){
+       return service.pesquisarPessoaPorCodigoPessoa(codigoPessoa);
+    }
+
 }
