@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface BairroService {
 
-    public BairroDTO salvar(BairroDTO bairroDTO);
-    public BairroDTO atualizar(BairroDTO bairroDTO);
+    List<BairroDTO> salvar(BairroDTO bairroDTO);
+    List<BairroDTO> atualizar(BairroDTO bairroDTO);
     List<BairroDTO> deletar(Long codigoBairro);
 
     List<BairroDTO> listarTodos();

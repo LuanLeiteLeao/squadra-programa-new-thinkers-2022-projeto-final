@@ -25,12 +25,12 @@ public class BairroController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public BairroDTO salvar(@RequestBody @Valid BairroDTO bairroDTO){
+    public List<BairroDTO> salvar(@RequestBody @Valid BairroDTO bairroDTO){
         return service.salvar(bairroDTO);
     }
 
     @PutMapping
-    public BairroDTO atualizar(@RequestBody @Valid BairroDTO bairroDTO){
+    public List<BairroDTO> atualizar(@RequestBody @Valid BairroDTO bairroDTO){
         return service.atualizar(bairroDTO);
     }
 

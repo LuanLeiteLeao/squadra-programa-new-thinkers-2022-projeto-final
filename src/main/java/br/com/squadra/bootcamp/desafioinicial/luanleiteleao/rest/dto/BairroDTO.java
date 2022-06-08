@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -16,6 +17,7 @@ public class BairroDTO {
 
     @NotNull(message = "Campo nome é obrigatório")
     @NotEmpty(message = "Campo nome não pode ser vazio")
+    @Size(max = 256, message = "Campo nome tem que ter no máximo o tamanho de 256 caracteres")
     private String nome;
 
     @NotNull(message = "Campo status é obrigatório")

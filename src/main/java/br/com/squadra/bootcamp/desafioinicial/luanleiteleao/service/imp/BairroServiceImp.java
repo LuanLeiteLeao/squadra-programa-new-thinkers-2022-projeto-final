@@ -2,11 +2,14 @@ package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.imp;
 
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Bairro;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Municipio;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.UF;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.BairroCustomRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.BairroRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.MunicipioRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.BairroDTO;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.MunicipioDTO;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.BairroService;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.validation.ValidadoresGerais;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -37,10 +40,12 @@ public class BairroServiceImp implements BairroService {
 
     @Override
     @Transactional
-    public BairroDTO salvar(BairroDTO bairroDTO) {
+    public List<BairroDTO> salvar(BairroDTO bairroDTO) {
         Municipio municipio = getMunicipioOuLancaErro(bairroDTO.getCodigoMunicipio());
+        ValidadoresGerais.validaSeEstatusTemEntradaValida(bairroDTO.getStatus());
+        validaSeJaExisteBairroCadastradoComMesmoNomeEMunicipio(bairroDTO,municipio);
 
-        Bairro bairroSalvo = bairroRepository.save(
+       bairroRepository.save(
                 new Bairro(
                         bairroDTO.getCodigoBairro(),
                         municipio,
@@ -49,16 +54,26 @@ public class BairroServiceImp implements BairroService {
                 )
         );
 
-        return converterParaBairroDTO(bairroSalvo);
+        return buscarTodosBairrosDTO();
+    }
+
+    private List<BairroDTO> buscarTodosBairrosDTO() {
+        return bairroRepository
+                .findAll()
+                .stream()
+                .map(BairroDTO::converte)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    public BairroDTO atualizar(BairroDTO bairroDTO) {
-
-        validaSeCampoForNulo(bairroDTO.getCodigoBairro(),"codigoBairro");
-
+    public List<BairroDTO> atualizar(BairroDTO bairroDTO) {
         Municipio municipio = getMunicipioOuLancaErro(bairroDTO.getCodigoMunicipio());
+        ValidadoresGerais.validaSeEstatusTemEntradaValida(bairroDTO.getStatus());
+        ValidadoresGerais.validaSeCampoForNulo(bairroDTO.getCodigoBairro(),"codigoBairro");
+
+
+
         Bairro bairroASerAtualizado = converterParaBairro(
                 bairroDTO,
                 municipio);
@@ -75,7 +90,7 @@ public class BairroServiceImp implements BairroService {
                         "Não Existe nem um Bairro cadastrado com esse codigoBairro: "
                                 + bairroASerAtualizado.getCodigoBairro()));
 
-        return converterParaBairroDTO(bairroAtualizado);
+        return buscarTodosBairrosDTO();
     }
 
     @Override
@@ -170,6 +185,17 @@ public class BairroServiceImp implements BairroService {
                 bairro.getNome(),
                 bairro.getStatus()
         );
+    }
+
+    private void validaSeJaExisteBairroCadastradoComMesmoNomeEMunicipio(BairroDTO bairroDTO, Municipio municipio) {
+        List<MunicipioDTO> test = (List<MunicipioDTO>)bairroCustomRepository.find(null,
+                municipio,
+                bairroDTO.getNome(),
+                null);
+
+        if(test.size() > 0){
+            throw new ResponseStatusException(BAD_REQUEST,"Não foi possível cadastrar Bairro no banco de dados, pois já existe um Bairro cadastrado com mesmo nome");
+        }
     }
 
 }
