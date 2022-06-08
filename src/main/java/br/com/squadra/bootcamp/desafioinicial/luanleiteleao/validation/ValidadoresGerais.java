@@ -1,5 +1,6 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.validation;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -32,6 +33,12 @@ public class ValidadoresGerais {
                     BAD_REQUEST,
                     String.format(" Lista %s não pode ser vazio",
                             nomeDoCampo));
+        }
+    }
+
+    static public void validaSeListaVeioVaziaDobancoDeDados(List lista,String menssagemErro){
+        if(lista.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,menssagemErro);
         }
     }
 }

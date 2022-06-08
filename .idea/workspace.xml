@@ -4,19 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84f4fc6b-9d18-4f01-b0d6-b768ba9f54ed" name="Changes" comment="implementado atualizar e delenar nos campos Pessoa e Bairo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/BairroCompletoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/EnderecoCompletoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/MunicipioCompletoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaCompletaComEnderecosDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaRessumidaSemEnderecosDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/UFCompletoTDO.java" afterDir="false" />
+    <list default="true" id="84f4fc6b-9d18-4f01-b0d6-b768ba9f54ed" name="Changes" comment="implementado todos listar e concertado bug em atulizar pessoa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/entity/Endereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/entity/Endereco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/PessoasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/PessoasController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/PessoaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/PessoaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/EnderecoServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/EnderecoServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/entity/UF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/entity/UF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/UFSRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/UFSRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/UFController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/UFController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/UFService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/UFService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/MunicipioServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/MunicipioServiceImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/UFServideImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/UFServideImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/validation/ValidadoresGerais.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/validation/ValidadoresGerais.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654565724518</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="implementado todos listar e concertado bug em atulizar pessoa">
+      <created>1654642992077</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1654642992077</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -216,7 +220,8 @@
     <MESSAGE value="implementado todos os listar de Bairro" />
     <MESSAGE value="implementado salvar Pessoa e Bairo" />
     <MESSAGE value="implementado atualizar e delenar nos campos Pessoa e Bairo" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementado atualizar e delenar nos campos Pessoa e Bairo" />
+    <MESSAGE value="implementado todos listar e concertado bug em atulizar pessoa" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementado todos listar e concertado bug em atulizar pessoa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

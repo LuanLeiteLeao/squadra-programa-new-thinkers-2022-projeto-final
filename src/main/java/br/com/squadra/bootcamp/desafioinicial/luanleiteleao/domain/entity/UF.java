@@ -1,7 +1,5 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity;
 
-import lombok.extern.java.Log;
-
 import javax.persistence.*;
 @Entity
 @Table(name = "TB_UF")
@@ -10,7 +8,7 @@ public class UF {
     @Column(name = "CODIGO_UF")
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "uf_gerator")
     @SequenceGenerator(name = "uf_gerator", initialValue = 1, allocationSize = 1, sequenceName = "SEQUENCE_UF")
-    private Long  codigoUf;
+    private Long codigoUF;
     @Column(name = "SIGLA")
     private  String sigla;
 
@@ -29,20 +27,20 @@ public class UF {
         this.status = status;
     }
 
-    public UF(Long codigoUf,String sigla, String nome, Integer status) {
-        this.codigoUf=codigoUf;
+    public UF(Long codigoUF, String sigla, String nome, Integer status) {
+        this.codigoUF = codigoUF;
         this.sigla = sigla;
         this.nome = nome;
         this.status = status;
     }
 
 
-    public Long getCodigoUf() {
-        return codigoUf;
+    public Long getCodigoUF() {
+        return codigoUF;
     }
 
-    public void setCodigoUf(Long codigoUf) {
-        this.codigoUf = codigoUf;
+    public void setCodigoUF(Long codigoUF) {
+        this.codigoUF = codigoUF;
     }
 
     public String getSigla() {
@@ -72,7 +70,7 @@ public class UF {
     @Override
     public String toString() {
         return "UF{" +
-                "codigoUf=" + codigoUf +
+                "codigoUf=" + codigoUF +
                 ", sigla='" + sigla + '\'' +
                 ", nome='" + nome + '\'' +
                 ", status=" + status +

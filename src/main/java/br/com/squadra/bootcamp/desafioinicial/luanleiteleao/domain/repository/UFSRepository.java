@@ -11,6 +11,9 @@ public interface UFSRepository extends JpaRepository<UF, Long> {
     @Query(" select uf from UF uf where uf.sigla = :sigla")
     List<UF> procuraPorSiglaTodasUF(@Param("sigla") String sigla);
 
+    @Query(" select uf from UF uf where uf.nome = :nome")
+    List<UF> procuraPorNomeTodasUF(@Param("nome") String nome);
+
     @Query(" SELECT count(*) FROM UF uf WHERE sigla = :sigla ")
     Integer buscarQuantidadeDeSiglaSalvas(@Param("sigla") String sigla);
 

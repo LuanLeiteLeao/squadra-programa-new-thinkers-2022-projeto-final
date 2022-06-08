@@ -127,7 +127,7 @@ public class MunicipioServiceImp implements MunicipioService {
     private MunicipioDTO converterParaMunicipioDTO(Municipio municipioSalvo) {
         return new MunicipioDTO(
                 municipioSalvo.getCodigoMunicipio(),
-                municipioSalvo.getCodigoUF().getCodigoUf(),
+                municipioSalvo.getCodigoUF().getCodigoUF(),
                 municipioSalvo.getNome(),
                 municipioSalvo.getStatus()
         );

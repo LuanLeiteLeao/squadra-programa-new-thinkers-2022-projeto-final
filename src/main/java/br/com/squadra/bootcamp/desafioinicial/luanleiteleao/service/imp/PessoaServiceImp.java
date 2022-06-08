@@ -134,7 +134,7 @@ public class PessoaServiceImp implements PessoaService {
     private MunicipioCompletoDTO converterBairroParaBairroCompletoDTO(Municipio municipio) {
         return new MunicipioCompletoDTO(
                 municipio.getCodigoMunicipio(),
-                municipio.getCodigoUF().getCodigoUf(),
+                municipio.getCodigoUF().getCodigoUF(),
                 municipio.getNome(),
                 municipio.getStatus(),
                 converterUFParaUFCompletoDTO(municipio.getCodigoUF())
@@ -143,7 +143,7 @@ public class PessoaServiceImp implements PessoaService {
 
     private UFCompletoTDO converterUFParaUFCompletoDTO(UF uf) {
         return new UFCompletoTDO(
-                uf.getCodigoUf(),
+                uf.getCodigoUF(),
                 uf.getSigla(),
                 uf.getNome(),
                 uf.getStatus()

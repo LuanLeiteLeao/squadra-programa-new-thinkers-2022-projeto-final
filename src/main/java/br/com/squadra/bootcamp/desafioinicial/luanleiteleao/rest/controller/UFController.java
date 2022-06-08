@@ -44,14 +44,18 @@ public class UFController {
         return service.ListarTodos();
     }
 
+    @GetMapping(params = "codigoUF")
+    public UF getUFPorCodigoUf(@RequestParam long codigoUF){
+        return service.buscarPorUFcodigoUF(codigoUF);
+    }
     @GetMapping(params = "sigla")
     public UF getUFPorSigla(@RequestParam String sigla){
        return service.buscarPorUFSigla(sigla);
     }
 
-    @GetMapping(params = "codigoUf")
-    public UF getUFPorCodigoUf(@RequestParam long codigoUf){
-        return service.buscarPorUFcodigoUF(codigoUf);
+    @GetMapping(params = "nome")
+    public UF getUFPorNome(@RequestParam String nome){
+        return service.buscarPorUFNome(nome);
     }
 
 

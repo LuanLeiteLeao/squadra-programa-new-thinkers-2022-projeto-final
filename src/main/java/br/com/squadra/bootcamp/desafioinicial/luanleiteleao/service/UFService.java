@@ -18,4 +18,6 @@ public interface UFService {
     UF buscarPorUFSigla(String sigla);
     
     UF buscarPorUFcodigoUF(Long codigoUf);
+
+    UF buscarPorUFNome(String nome);
 }
