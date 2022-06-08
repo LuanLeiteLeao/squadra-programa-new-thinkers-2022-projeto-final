@@ -2,6 +2,7 @@ package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.imp;
 
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Bairro;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Municipio;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.BairroCustomRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.BairroRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.MunicipioRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.BairroDTO;
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static br.com.squadra.bootcamp.desafioinicial.luanleiteleao.validation.ValidadoresGerais.validaSeCampoForNulo;
@@ -22,10 +26,13 @@ public class BairroServiceImp implements BairroService {
 
     private BairroRepository bairroRepository;
     private MunicipioRepository municipioRepository;
+    private BairroCustomRepository bairroCustomRepository;
 
-    public BairroServiceImp(BairroRepository bairroRepository, MunicipioRepository municipioRepository) {
+
+    public BairroServiceImp(BairroRepository bairroRepository, MunicipioRepository municipioRepository, BairroCustomRepository bairroCustomRepository) {
         this.bairroRepository = bairroRepository;
         this.municipioRepository = municipioRepository;
+        this.bairroCustomRepository = bairroCustomRepository;
     }
 
     @Override
@@ -118,6 +125,27 @@ public class BairroServiceImp implements BairroService {
                 .map(bairro -> converterParaBairroDTO(bairro))
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public Object bairroCustomRepository(Long codigoBairro, Long codigoMunicipio, String nome, Integer status) {
+        Municipio codigoMunicipioValidado =null;
+        boolean isRetornaListaVazia=false;
+
+        if(codigoMunicipio!=null){
+            try {
+                codigoMunicipioValidado = municipioRepository.findById(codigoMunicipio).get();
+            }catch (NoSuchElementException ex){
+                isRetornaListaVazia=true;
+            }
+        }
+
+        if(isRetornaListaVazia){
+            return new ArrayList<>();
+        }
+
+        return bairroCustomRepository
+                .find(codigoBairro,codigoMunicipioValidado,nome, status);
     }
 
     private Bairro converterParaBairro(BairroDTO bairroDTO, Municipio municipio) {

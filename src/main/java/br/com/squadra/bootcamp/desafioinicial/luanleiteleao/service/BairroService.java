@@ -16,4 +16,6 @@ public interface BairroService {
     BairroDTO consultarPorCodigoBairro(Long codigoBairro);
 
     List<BairroDTO> listarPorCodigoMunicipio(Long codigoMunicipio);
+
+    Object bairroCustomRepository(Long codigoBairro, Long codigoMunicipio, String nome, Integer status);
 }

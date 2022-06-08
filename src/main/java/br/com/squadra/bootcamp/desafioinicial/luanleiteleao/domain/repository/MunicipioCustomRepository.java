@@ -2,6 +2,7 @@ package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository;
 
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Municipio;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.UF;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.BairroDTO;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.MunicipioDTO;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 public class MunicipioCustomRepository {
 
     private final EntityManager em;
-
+    private static String SELECT = "select mu from Municipio as mu ";
 
     public MunicipioCustomRepository(EntityManager em) {
         this.em = em;
@@ -23,32 +24,38 @@ public class MunicipioCustomRepository {
     public Object find(Long codigoMunicipio, UF codigoUF, String nome, Integer status) {
 
 
-        String query = "select mu from Municipio as mu ";
+        String query = SELECT;
         String condicao = " where ";
-        Boolean isPesquisaPorCodigoMunicipio = true;
+        Boolean isPesquisaPorPKOuFK = true;
+        boolean isEntrouEmcodigoUF=false;
+        boolean isEntrouEmcodigoMunicipio=false;
 
 
         if(codigoUF != null) {
             query += condicao + " mu.codigoUF = :codigoUF";
             condicao = " and ";
+            isEntrouEmcodigoUF=true;
 
-            isPesquisaPorCodigoMunicipio=false;
         }
         if(codigoMunicipio != null) {
             query += condicao + " mu.codigoMunicipio = :codigoMunicipio";
             condicao = " and ";
-
+            isEntrouEmcodigoMunicipio=true;
         }
 
         if(nome != null) {
             query += condicao + " mu.nome = :nome";
             condicao = " and ";
-            isPesquisaPorCodigoMunicipio=false;
+            isPesquisaPorPKOuFK=false;
         }
 
         if(status != null) {
             query += condicao + " mu.status = :status";
-            isPesquisaPorCodigoMunicipio=false;
+            isPesquisaPorPKOuFK=false;
+        }
+//        se todo mundo for nulo
+        if(query.equals(SELECT)){
+            isPesquisaPorPKOuFK=false;
         }
 
         var q = em.createQuery(query, Municipio.class);
@@ -78,8 +85,8 @@ public class MunicipioCustomRepository {
             return listaMunicipio;
         }
         //retorna apenas uma
-        if(isPesquisaPorCodigoMunicipio){
-
+        if(isPesquisaPorPKOuFK && isEntrouEmcodigoUF && isEntrouEmcodigoMunicipio ||
+                (isPesquisaPorPKOuFK && isEntrouEmcodigoMunicipio )){
             return MunicipioDTO.converte(listaMunicipio.get(0));
         }
 

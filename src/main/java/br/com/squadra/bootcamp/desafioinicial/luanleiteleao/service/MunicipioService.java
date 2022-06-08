@@ -5,9 +5,9 @@ import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.MunicipioDT
 import java.util.List;
 
 public interface MunicipioService {
-    MunicipioDTO salvar(MunicipioDTO municipioDTO);
+    List<MunicipioDTO> salvar(MunicipioDTO municipioDTO);
 
-    MunicipioDTO atualizar(MunicipioDTO municipioDTO);
+    List<MunicipioDTO> atualizar(MunicipioDTO municipioDTO);
      List<MunicipioDTO> deletar(Long codigoMunicipio);
 
     List<MunicipioDTO> listarTodos();

@@ -7,13 +7,16 @@ import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.Mu
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.UFSRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.MunicipioDTO;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.MunicipioService;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.validation.ValidadoresGerais;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import static org.springframework.http.HttpStatus.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,23 +34,48 @@ public class MunicipioServiceImp implements MunicipioService {
 
     @Override
     @Transactional
-    public MunicipioDTO salvar(MunicipioDTO municipioDTO) {
+    public List<MunicipioDTO> salvar(MunicipioDTO municipioDTO) {
 
         UF uf = getUfOuLancaErro(municipioDTO.getCodigoUF());
+        ValidadoresGerais.validaSeEstatusTemEntradaValida(municipioDTO.getStatus());
+        validaSeJaExisteMunicipioCadastradoComMesmoNomeEUF(municipioDTO, uf);
 
         Municipio municipioSalvo = municipioRepository.save(
                 new Municipio(uf, municipioDTO.getNome(), municipioDTO.getStatus()));
 
-        return converterParaMunicipioDTO(municipioSalvo);
+        return findAllMunicipioDTOS();
     }
 
+    private List<MunicipioDTO> findAllMunicipioDTOS() {
+        return municipioRepository
+                .findAll()
+                .stream()
+                .map(MunicipioDTO::converte)
+                .collect(Collectors.toList());
+    }
+
+    private void validaSeJaExisteMunicipioCadastradoComMesmoNomeEUF(MunicipioDTO municipioDTO, UF uf) {
+        List<MunicipioDTO> test = (List<MunicipioDTO>)municipioCustomRepository.find(null,
+                uf,
+                municipioDTO.getNome(),
+                null);
+
+        if(test.size() > 0){
+            throw new ResponseStatusException(BAD_REQUEST,"Não foi possível cadastrar município no banco de dados, pois já existe um Municípo cadastrado com mesmo nome");
+        }
+    }
 
 
     @Override
     @Transactional
-    public MunicipioDTO atualizar(MunicipioDTO municipioASerAtualizadoDTO) {
+    public List<MunicipioDTO> atualizar(MunicipioDTO municipioASerAtualizadoDTO) {
 
         UF ufASerAtualizado = getUfOuLancaErro(municipioASerAtualizadoDTO.getCodigoUF());
+        ValidadoresGerais.validaSeEstatusTemEntradaValida(municipioASerAtualizadoDTO.getStatus());
+        ValidadoresGerais.validaSeCampoForNulo(municipioASerAtualizadoDTO.getCodigoMunicipio(),"codigoMunicipio");
+        validaSeJaExisteMunicipioCadastradoComMesmoNomeEUF(municipioASerAtualizadoDTO, ufASerAtualizado);
+
+
         Municipio municipioASerAtualizado = converterParaMunicipio(
                 municipioASerAtualizadoDTO,
                 ufASerAtualizado);
@@ -64,7 +92,7 @@ public class MunicipioServiceImp implements MunicipioService {
                         "Não Existe nem um Municipio cadastrado com esse codigoMunicipio: "
                                 + municipioASerAtualizadoDTO.getCodigoMunicipio()));
 
-        return converterParaMunicipioDTO(municipioAtualizado);
+        return findAllMunicipioDTOS();
 
     }
 
@@ -122,15 +150,24 @@ public class MunicipioServiceImp implements MunicipioService {
     @Override
     public Object findPersonByCustom(Long codigoMunicipio, Long codigoUF, String nome, Integer status) {
         UF codigoUFValidado = null;
+        boolean isRetornaListaVazia=false;
 
         if(codigoUF!=null){
-           codigoUFValidado = getUfOuLancaErro(codigoUF);
+            try {
+                codigoUFValidado = ufsRepository.findById(codigoUF).get();
+            }catch (NoSuchElementException ex){
+                isRetornaListaVazia=true;
+            }
         }
 
+        if(isRetornaListaVazia){
+            return new ArrayList<>();
+        }
+//        if(codigoUF!=null){
+//           codigoUFValidado = getUfOuLancaErro(codigoUF);
+//        }
         return municipioCustomRepository
                 .find(codigoMunicipio, codigoUFValidado, nome, status);
-
-
     }
 
     private Municipio converterParaMunicipio(MunicipioDTO municipioASerAtualizadoDTO, UF ufASerAtualizado) {

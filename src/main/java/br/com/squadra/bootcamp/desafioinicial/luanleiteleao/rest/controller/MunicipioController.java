@@ -16,21 +16,19 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RequestMapping("/municipio")
 public class MunicipioController {
     private MunicipioServiceImp service;
-    private MunicipioCustomRepository municipioCustomRepository;
 
-    public MunicipioController(MunicipioServiceImp service, MunicipioCustomRepository municipioCustomRepository) {
+    public MunicipioController(MunicipioServiceImp service) {
         this.service = service;
-        this.municipioCustomRepository = municipioCustomRepository;
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public MunicipioDTO salvar(@RequestBody @Valid MunicipioDTO municipioDTO){
+    public List<MunicipioDTO> salvar(@RequestBody @Valid MunicipioDTO municipioDTO){
         return service.salvar(municipioDTO);
     }
 
     @PutMapping
-    public MunicipioDTO atualizar(@RequestBody @Valid MunicipioDTO municipioDTO){
+    public List<MunicipioDTO> atualizar(@RequestBody @Valid MunicipioDTO municipioDTO){
         return service.atualizar(municipioDTO);
     }
 
