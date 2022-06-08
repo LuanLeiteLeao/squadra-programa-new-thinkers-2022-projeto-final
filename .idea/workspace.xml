@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84f4fc6b-9d18-4f01-b0d6-b768ba9f54ed" name="Changes" comment="realizando tests com UF GET">
+    <list default="true" id="84f4fc6b-9d18-4f01-b0d6-b768ba9f54ed" name="Changes" comment="GET com parametros dinamicos UF">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/UFSRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/UFSRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/exception/JaExisteUmRegistroSalvoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/exception/JaExisteUmRegistroSalvoException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/UFController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/UFController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/UFService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/UFService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/UFDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/UFDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/UFServideImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/UFServideImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/validation/ValidadoresGerais.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/validation/ValidadoresGerais.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654647810562</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="GET com parametros dinamicos UF">
+      <created>1654653895644</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1654653895644</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -226,7 +231,8 @@
     <MESSAGE value="implementado atualizar e delenar nos campos Pessoa e Bairo" />
     <MESSAGE value="implementado todos listar e concertado bug em atulizar pessoa" />
     <MESSAGE value="realizando tests com UF GET" />
-    <option name="LAST_COMMIT_MESSAGE" value="realizando tests com UF GET" />
+    <MESSAGE value="GET com parametros dinamicos UF" />
+    <option name="LAST_COMMIT_MESSAGE" value="GET com parametros dinamicos UF" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

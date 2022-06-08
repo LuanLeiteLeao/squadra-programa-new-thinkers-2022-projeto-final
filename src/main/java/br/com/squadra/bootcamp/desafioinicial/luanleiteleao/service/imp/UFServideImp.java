@@ -27,6 +27,7 @@ public class UFServideImp implements UFService {
     @Transactional
     public List<UF> salvar(UFDTO ufDTO) {
         validaSeExisteUFComSiglaJaCadastrado(ufDTO);
+        ValidadoresGerais.validaSeEstatusTemEntradaValida(ufDTO.getStatus());
 
         ufsRepository.save(
           new UF(ufDTO.getSigla(), ufDTO.getNome(), ufDTO.getStatus())
@@ -54,6 +55,7 @@ public class UFServideImp implements UFService {
     @Transactional
     public List<UF> atualizar(UFDTOComId uf) {
         validaSeExisteApenasUmaUFComSiglaOuNomeJaCadastrado(uf);
+        ValidadoresGerais.validaSeEstatusTemEntradaValida(uf.getStatus());
 
         ufsRepository.findById(uf.getCodigoUF())
                 .map(u-> ufsRepository.save(new UF(

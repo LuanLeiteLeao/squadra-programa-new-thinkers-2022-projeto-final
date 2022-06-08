@@ -38,7 +38,13 @@ public class ValidadoresGerais {
 
     static public void validaSeListaVeioVaziaDobancoDeDados(List lista,String menssagemErro){
         if(lista.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,menssagemErro);
+            throw new ResponseStatusException(BAD_REQUEST,menssagemErro);
+        }
+    }
+
+    static public void validaSeEstatusTemEntradaValida(Integer status){
+        if(status!=1 && status!=2){
+            throw new ResponseStatusException(BAD_REQUEST,"O campo status só aceita 1 ou 2, (1-ativado, 2-desativado)");
         }
     }
 }
