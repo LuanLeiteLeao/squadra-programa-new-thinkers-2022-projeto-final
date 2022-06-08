@@ -4,8 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
-@Entity
+@Data@Entity
 @Table(name = "TB_MUNICIPIO")
 public class Municipio {
     @Id

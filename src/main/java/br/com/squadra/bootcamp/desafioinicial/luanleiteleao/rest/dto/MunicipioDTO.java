@@ -1,5 +1,6 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto;
 
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Municipio;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,5 +36,14 @@ public class MunicipioDTO {
         this.codigoUF = codigoUF;
         this.nome = nome;
         this.status = status;
+    }
+
+    public static MunicipioDTO converte(Municipio municipio){
+        return new MunicipioDTO(
+                municipio.getCodigoMunicipio(),
+                municipio.getCodigoUF().getCodigoUF(),
+                municipio.getNome(),
+                municipio.getStatus()
+        );
     }
 }

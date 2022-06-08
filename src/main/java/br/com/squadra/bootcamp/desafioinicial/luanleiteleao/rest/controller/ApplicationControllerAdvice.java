@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.net.BindException;
+import org.springframework.validation.BindException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,6 +53,13 @@ public class ApplicationControllerAdvice {
     public ApiErros lidarComMethodArgumentTypeMismatchException( MethodArgumentTypeMismatchException ex){
         return new ApiErros(BAD_REQUEST,"incompatibilidade de valor para parametro "+ ex.getName());
     }
+
+    @ExceptionHandler(BindException.class)
+    @ResponseStatus(BAD_REQUEST)
+    public ApiErros lidarComBindException( BindException ex){
+        return new ApiErros(BAD_REQUEST,"incompatibilidade com tipo de dado informado ");
+    }
+//    BindException .NumberFormatException
 
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(NOT_FOUND)

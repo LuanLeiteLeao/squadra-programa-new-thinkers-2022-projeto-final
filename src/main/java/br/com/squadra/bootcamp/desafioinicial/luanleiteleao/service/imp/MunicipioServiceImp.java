@@ -2,6 +2,7 @@ package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.imp;
 
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Municipio;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.UF;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.MunicipioCustomRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.MunicipioRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.UFSRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.MunicipioDTO;
@@ -20,10 +21,12 @@ public class MunicipioServiceImp implements MunicipioService {
 
     private UFSRepository ufsRepository;
     private MunicipioRepository municipioRepository;
+    private MunicipioCustomRepository municipioCustomRepository;
 
-    public MunicipioServiceImp(UFSRepository ufsRepository, MunicipioRepository municipioRepository) {
+    public MunicipioServiceImp(UFSRepository ufsRepository, MunicipioRepository municipioRepository, MunicipioCustomRepository municipioCustomRepository) {
         this.ufsRepository = ufsRepository;
         this.municipioRepository = municipioRepository;
+        this.municipioCustomRepository = municipioCustomRepository;
     }
 
     @Override
@@ -114,6 +117,20 @@ public class MunicipioServiceImp implements MunicipioService {
                 .stream()
                 .map(m ->converterParaMunicipioDTO(m))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Object findPersonByCustom(Long codigoMunicipio, Long codigoUF, String nome, Integer status) {
+        UF codigoUFValidado = null;
+
+        if(codigoUF!=null){
+           codigoUFValidado = getUfOuLancaErro(codigoUF);
+        }
+
+        return municipioCustomRepository
+                .find(codigoMunicipio, codigoUFValidado, nome, status);
+
+
     }
 
     private Municipio converterParaMunicipio(MunicipioDTO municipioASerAtualizadoDTO, UF ufASerAtualizado) {

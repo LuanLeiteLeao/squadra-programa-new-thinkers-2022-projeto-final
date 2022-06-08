@@ -8,11 +8,13 @@ public interface MunicipioService {
     MunicipioDTO salvar(MunicipioDTO municipioDTO);
 
     MunicipioDTO atualizar(MunicipioDTO municipioDTO);
-    public List<MunicipioDTO> deletar(Long codigoMunicipio);
+     List<MunicipioDTO> deletar(Long codigoMunicipio);
 
     List<MunicipioDTO> listarTodos();
 
     MunicipioDTO consultandoPorcodigoMunicipio(Long codigoMunicipio);
 
     List<MunicipioDTO> listarPorCodigoUF(Long codigoUF);
+
+    Object findPersonByCustom(Long codigoMunicipio, Long codigoUF, String nome, Integer status);
 }

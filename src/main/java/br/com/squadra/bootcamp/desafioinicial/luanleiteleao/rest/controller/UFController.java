@@ -1,13 +1,13 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.controller;
 
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.UF;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.UFCustomRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.UFDTO;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.UFDTOComId;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.imp.UFServideImp;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -19,9 +19,11 @@ import static org.springframework.http.HttpStatus.*;
 public class UFController {
 
     private UFServideImp service;
+    private UFCustomRepository ufCustomRepository;
 
-    public UFController(UFServideImp service) {
+    public UFController(UFServideImp service, br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.UFCustomRepository ufCustomRepository) {
         this.service = service;
+        this.ufCustomRepository = ufCustomRepository;
     }
 
     @PostMapping
@@ -40,21 +42,35 @@ public class UFController {
        return service.atualizar(uf);
     }
 
+//    @GetMapping
+//    public Object listarTodasUfs(UF uf){
+//
+//        if(uf.getCodigoUF()!=null){
+//            return service.buscarPorUFcodigoUF(uf.getCodigoUF());
+//        } else if (uf.getSigla()!=null) {
+//            return service.buscarPorUFSigla(uf.getSigla());
+//        }else if(uf.getNome()!=null){
+//            return service.buscarPorUFNome(uf.getNome());
+//        }else if (uf.getStatus()!=null) {
+//            return service.buscarPorUFStatus(uf.getStatus());
+//        }
+//
+//        return service.ListarTodos();
+//    }
+
     @GetMapping
-    public Object listarTodasUfs(UF uf){
+    public Object findUFByCustom(
+            @RequestParam(value = "codigoUF", required = false) Long codigoUF,
+            @RequestParam(value = "sigla", required = false) String sigla,
+            @RequestParam(value = "nome", required = false) String nome,
+            @RequestParam(value = "status", required = false) Integer status
+    ) {
 
-        if(uf.getCodigoUF()!=null){
-            return service.buscarPorUFcodigoUF(uf.getCodigoUF());
-        } else if (uf.getSigla()!=null) {
-            return service.buscarPorUFSigla(uf.getSigla());
-        }else if(uf.getNome()!=null){
-            return service.buscarPorUFNome(uf.getNome());
-        }else if (uf.getStatus()!=null) {
-            return service.buscarPorUFStatus(uf.getStatus());
-        }
 
-        return service.ListarTodos();
+        return ufCustomRepository.find(codigoUF,sigla,nome,status);
+
     }
+
 
 //    @GetMapping(params = "codigoUF")
 //    public UF getUFPorCodigoUf(@RequestParam long codigoUF){
@@ -75,17 +91,7 @@ public class UFController {
 //        return service.buscarPorUFStatus(status);
 //    }
 
-    @GetMapping(params = "customQuery")
-    public String controllerMethod(@RequestParam Map<String, String> customQuery) {
 
-        System.out.println("customQuery = brand " + customQuery.containsKey("brand"));
-        System.out.println("customQuery = limit " + customQuery.containsKey("limit"));
-        System.out.println("customQuery = price " + customQuery.containsKey("price"));
-        System.out.println("customQuery = other " + customQuery.containsKey("other"));
-        System.out.println("customQuery = sort " + customQuery.containsKey("sort"));
-
-        return customQuery.toString();
-    }
 
 }
 
