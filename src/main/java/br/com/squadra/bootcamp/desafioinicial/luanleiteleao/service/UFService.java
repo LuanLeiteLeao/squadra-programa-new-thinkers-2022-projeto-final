@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UFService {
-    UF salvar(UFDTO ufDTO);
+    List<UF> salvar(UFDTO ufDTO);
     List<UF> deletar(Long codigoUf);
 
-    UF atualizar(UFDTOComId uf);
+    List<UF> atualizar(UFDTOComId uf);
 
     List<UF> ListarTodos();
 
@@ -20,4 +20,6 @@ public interface UFService {
     UF buscarPorUFcodigoUF(Long codigoUf);
 
     UF buscarPorUFNome(String nome);
+
+    List<UF> buscarPorUFStatus(Integer status);
 }

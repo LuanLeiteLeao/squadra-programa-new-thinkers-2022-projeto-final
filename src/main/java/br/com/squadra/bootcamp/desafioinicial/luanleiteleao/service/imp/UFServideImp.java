@@ -25,13 +25,14 @@ public class UFServideImp implements UFService {
 
     @Override
     @Transactional
-    public UF salvar(UFDTO ufDTO) {
+    public List<UF> salvar(UFDTO ufDTO) {
         validaSeExisteUFComSiglaJaCadastrado(ufDTO);
 
-        return ufsRepository.save(
+        ufsRepository.save(
           new UF(ufDTO.getSigla(), ufDTO.getNome(), ufDTO.getStatus())
        );
 
+        return ufsRepository.findAll();
     }
 
     @Override
@@ -43,7 +44,7 @@ public class UFServideImp implements UFService {
                     ufsRepository.delete(uf);
                     return true;
                 })
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"UF não encotrado"));
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Não foi possível consultar UF no banco de dados."));
 
 
         return ufsRepository.findAll();
@@ -51,15 +52,18 @@ public class UFServideImp implements UFService {
 
     @Override
     @Transactional
-    public UF atualizar(UFDTOComId uf) {
+    public List<UF> atualizar(UFDTOComId uf) {
         validaSeExisteApenasUmaUFComSiglaOuNomeJaCadastrado(uf);
 
-        return ufsRepository.findById(uf.getCodigoUF())
-                .map(u-> ufsRepository.save(new UF(u.getCodigoUF(),
+        ufsRepository.findById(uf.getCodigoUF())
+                .map(u-> ufsRepository.save(new UF(
+                        uf.getCodigoUF(),
                         uf.getSigla(),
                         uf.getNome(),
                         uf.getStatus())))
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"UF não encontrado, codigoUf inválido"));
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Não foi possível consultar UF no banco de dados."));
+
+        return ufsRepository.findAll();
     }
 
     @Override
@@ -88,6 +92,11 @@ public class UFServideImp implements UFService {
         return lista.get(0);
     }
 
+    @Override
+    public List<UF> buscarPorUFStatus(Integer status) {
+        return ufsRepository.procuraPorStatusTodasUF(status);
+    }
+
 
     private void validaSeExisteUFComSiglaJaCadastrado(UFDTO ufDTO){
         if(ufsRepository.buscarQuantidadeDeNomeSalvas(ufDTO.getNome()) > 0){
@@ -99,11 +108,11 @@ public class UFServideImp implements UFService {
     }
 
     private void validaSeExisteApenasUmaUFComSiglaOuNomeJaCadastrado(UFDTO ufDTO){
-        if(ufsRepository.buscarQuantidadeDeNomeSalvas(ufDTO.getNome()) >=2 ){
+        if(ufsRepository.buscarQuantidadeDeNomeSalvas(ufDTO.getNome()) >=1 ){
             throw new  JaExisteUmRegistroSalvoException("nome",ufDTO.getNome());
         }
 
-        else if(ufsRepository.buscarQuantidadeDeSiglaSalvas(ufDTO.getSigla()) >=2 ){
+        else if(ufsRepository.buscarQuantidadeDeSiglaSalvas(ufDTO.getSigla()) >=1 ){
             throw new  JaExisteUmRegistroSalvoException("sigla", ufDTO.getSigla());
         }
     }
