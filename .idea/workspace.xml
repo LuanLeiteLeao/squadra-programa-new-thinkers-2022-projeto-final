@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84f4fc6b-9d18-4f01-b0d6-b768ba9f54ed" name="Changes" comment="implementado pesquisas custumizadas em bairro">
+    <list default="true" id="84f4fc6b-9d18-4f01-b0d6-b768ba9f54ed" name="Changes" comment="implementado post e put em bairro">
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/domain/repository/PessoaCustomRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/BairroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/BairroController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/BairroDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/BairroDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/BairroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/BairroService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/BairroServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/BairroServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/PessoasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/controller/PessoasController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/BairroCompletoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/BairroCompletoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/EnderecoCompletoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/EnderecoCompletoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/MunicipioCompletoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/MunicipioCompletoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaCompletaComEnderecosDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaCompletaComEnderecosDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/PessoaDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/UFCompletoTDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/rest/dto/UFCompletoTDO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/PessoaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/PessoaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654724594557</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="implementado post e put em bairro">
+      <created>1654726536183</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1654726536183</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -258,22 +271,7 @@
     <MESSAGE value="UF com validacoes de status e tamanho" />
     <MESSAGE value="Municipio implemanado cunston repository" />
     <MESSAGE value="implementado pesquisas custumizadas em bairro" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementado pesquisas custumizadas em bairro" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/br/com/squadra/bootcamp/desafioinicial/luanleiteleao/service/imp/PessoaServiceImp.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="implementado post e put em bairro" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementado post e put em bairro" />
   </component>
 </project>

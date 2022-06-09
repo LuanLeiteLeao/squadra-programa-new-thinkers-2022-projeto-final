@@ -1,5 +1,6 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto;
 
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Endereco;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,5 +27,18 @@ public class EnderecoCompletoDTO {
         this.complemento = complemento;
         this.cep = cep;
         this.bairro = bairro;
+    }
+
+
+    public static EnderecoCompletoDTO converter(Endereco endereco) {
+        return new EnderecoCompletoDTO(
+                endereco.getCodigoEndereco(),
+                endereco.getCodigoBairro().getCodigoBairro(),
+                endereco.getCodigoPessoa().getCodigoPessoa(),
+                endereco.getNomeRua(),
+                endereco.getNumero(),
+                endereco.getComplemento(),
+                endereco.getCep(),
+                BairroCompletoDTO.converter( endereco.getCodigoBairro()));
     }
 }

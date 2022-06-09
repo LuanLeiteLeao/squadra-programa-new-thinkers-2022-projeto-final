@@ -1,5 +1,6 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto;
 
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.UF;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,15 @@ public class UFCompletoTDO {
         this.sigla = sigla;
         this.nome = nome;
         this.status = status;
+    }
+
+    public static UFCompletoTDO converter(UF codigoUF) {
+        return new UFCompletoTDO(
+                codigoUF.getCodigoUF(),
+                codigoUF.getSigla(),
+                codigoUF.getNome(),
+                codigoUF.getStatus()
+        );
     }
 }
 

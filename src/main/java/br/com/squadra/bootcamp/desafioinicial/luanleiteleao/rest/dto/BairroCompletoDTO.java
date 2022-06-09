@@ -1,5 +1,6 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto;
 
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Bairro;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,16 @@ public class BairroCompletoDTO {
         this.nome = nome;
         this.status = status;
         this.municipio = municipio;
+    }
+
+    public static BairroCompletoDTO converter(Bairro codigoBairro) {
+        return new BairroCompletoDTO(
+                codigoBairro.getCodigoBairro(),
+                codigoBairro.getCodigoMunicipio().getCodigoMunicipio(),
+                codigoBairro.getNome(),
+                codigoBairro.getStatus(),
+                MunicipioCompletoDTO.converte( codigoBairro.getCodigoMunicipio())
+        );
     }
 }
 

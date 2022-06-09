@@ -1,12 +1,14 @@
 package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto;
 
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Endereco;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.Pessoa;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.validation.NotEmptyList;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -53,5 +55,18 @@ public class PessoaDTO {
         this.senha = senha;
         this.enderecos = enderecos;
         this.status = status;
+    }
+
+    public static PessoaDTO converte(Pessoa pessoa) {
+        return new PessoaDTO(
+                pessoa.getCodigoPessoa(),
+                pessoa.getNome(),
+                pessoa.getSobrenome(),
+                pessoa.getIdade(),
+                pessoa.getLogin(),
+                pessoa.getSenha(),
+                new ArrayList<>(),
+                pessoa.getStatus()
+        );
     }
 }

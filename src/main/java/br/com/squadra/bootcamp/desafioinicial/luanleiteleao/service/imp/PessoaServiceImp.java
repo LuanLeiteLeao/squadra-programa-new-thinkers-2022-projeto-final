@@ -2,6 +2,7 @@ package br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.imp;
 
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.entity.*;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.BairroRepository;
+import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.PessoaCustomRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.domain.repository.PessoaRepository;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.rest.dto.*;
 import br.com.squadra.bootcamp.desafioinicial.luanleiteleao.service.PessoaService;
@@ -22,11 +23,13 @@ public class PessoaServiceImp implements PessoaService {
     private BairroRepository bairroRepository;
 
     private EnderecoServiceImp enderecoService;
+    private PessoaCustomRepository pessoaCustomRepository;
 
-    public PessoaServiceImp(PessoaRepository pessoaRepository, BairroRepository bairroRepository, EnderecoServiceImp enderecoService) {
+    public PessoaServiceImp(PessoaRepository pessoaRepository, BairroRepository bairroRepository, EnderecoServiceImp enderecoService, PessoaCustomRepository pessoaCustomRepository) {
         this.pessoaRepository = pessoaRepository;
         this.bairroRepository = bairroRepository;
         this.enderecoService = enderecoService;
+        this.pessoaCustomRepository = pessoaCustomRepository;
     }
 
     @Override
@@ -99,6 +102,11 @@ public class PessoaServiceImp implements PessoaService {
         pessoaCompleta.setEnderecos(enderecosCompleto);
 
         return pessoaCompleta;
+    }
+
+    @Override
+    public Object findPersonByCustom(Long codigoPessoa, String login, Integer status) {
+        return pessoaCustomRepository.find(codigoPessoa,login,status);
     }
 
     private List<EnderecoCompletoDTO> converterEnderecoParaEnderecoCompletoDTO(List<Endereco> enderecos) {

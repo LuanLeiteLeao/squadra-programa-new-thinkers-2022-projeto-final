@@ -20,10 +20,10 @@ public class PessoasController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<PessoaRessumidaSemEnderecosDTO> listarTodos(){
-        return service.listarTodos();
-    }
+//    @GetMapping
+//    public List<PessoaRessumidaSemEnderecosDTO> listarTodos(){
+//        return service.listarTodos();
+//    }
 
     @PostMapping
     @ResponseStatus(CREATED)
@@ -42,10 +42,22 @@ public class PessoasController {
         return "Deletado";
     }
 
-//    PESQUISAR PESSOA POR codigoPessoa
-    @GetMapping(params = "codigoPessoa")
-    public PessoaCompletaComEnderecosDTO pesquisarPessoaPorCodigoPessoa( @RequestParam Long codigoPessoa){
-       return service.pesquisarPessoaPorCodigoPessoa(codigoPessoa);
+////    PESQUISAR PESSOA POR codigoPessoa
+//    @GetMapping(params = "codigoPessoa")
+//    public PessoaCompletaComEnderecosDTO pesquisarPessoaPorCodigoPessoa( @RequestParam Long codigoPessoa){
+//       return service.pesquisarPessoaPorCodigoPessoa(codigoPessoa);
+//    }
+
+    @GetMapping
+    public Object findPersonByCustom(
+            @RequestParam(value = "codigoPessoa", required = false) Long codigoPessoa,
+            @RequestParam(value = "login", required = false) String login,
+            @RequestParam(value = "status", required = false) Integer status
+    ) {
+
+        return service.findPersonByCustom(codigoPessoa,login,status);
+
+
     }
 
 }

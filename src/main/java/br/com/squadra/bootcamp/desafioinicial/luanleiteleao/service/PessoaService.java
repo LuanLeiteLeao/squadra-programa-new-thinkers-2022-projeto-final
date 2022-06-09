@@ -16,4 +16,6 @@ public interface PessoaService{
     List<PessoaRessumidaSemEnderecosDTO> listarTodos();
 
     PessoaCompletaComEnderecosDTO pesquisarPessoaPorCodigoPessoa(Long codigoPessoa);
+
+    Object findPersonByCustom(Long codigoPessoa, String login, Integer status);
 }
